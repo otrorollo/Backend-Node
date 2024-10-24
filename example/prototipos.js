@@ -61,4 +61,46 @@ smith.adios()
    3. Las instancias de Agente pueden usar los métodos definidos en Persona.prototype.
    Este enfoque permite crear una jerarquía de objetos, donde los objetos hijos
    (Agente) heredan propiedades y métodos de los objetos padres (Persona). */
-   
+
+// Herencia múltiple
+
+// Quiero que los agentes hereden tanto de las personas como de los superheroes
+/* Definimos una nueva "clase" Superheroe */
+function Superheroe() {
+    this.vuela = function() { console.log(this.nombre, 'vuela')}
+  }
+  
+  /* Implementamos herencia múltiple usando Object.assign */
+  /* Esto copia todas las propiedades de una nueva instancia de Superheroe al prototipo de Agente */
+  Object.assign(Agente.prototype, new Superheroe())
+  
+  /* Ahora smith, siendo un Agente, también tiene acceso al método 'vuela' */
+  smith.vuela()
+  
+  /* Imprimimos smith para ver su estructura */
+  console.log(smith)
+  
+  /* Imprimimos el prototipo de Agente para ver las propiedades heredadas */
+  console.log(Agente.prototype)
+  
+  /* Verificamos la cadena de prototipos usando instanceof */
+  console.log(smith instanceof Persona)    // true: smith es una instancia de Persona
+  console.log(smith instanceof Agente)     // true: smith es una instancia de Agente
+  console.log(smith instanceof Superheroe) // false: técnicamente, smith no es una instancia directa de Superheroe
+  
+  /* Resumen de herencia múltiple:
+     1. Se crea una nueva "clase" Superheroe con un método 'vuela'.
+     2. Se usa Object.assign para copiar propiedades de Superheroe al prototipo de Agente.
+     3. Esto permite que las instancias de Agente (como smith) accedan a métodos de Superheroe.
+     4. La verificación con instanceof muestra las limitaciones de este enfoque de herencia múltiple. */
+
+/**
+ * aclaración:
+ * Este código demuestra una forma de implementar herencia múltiple en JavaScript, 
+ * aunque tiene algunas limitaciones. El uso de Object.assign permite copiar propiedades 
+ * de una clase a otra, pero no establece una verdadera relación de herencia en términos 
+ * de la cadena de prototipos. Esto se refleja en el resultado de instanceof Superheroe, que es false.
+Es importante notar que este enfoque de herencia múltiple es una simulación y tiene sus 
+limitaciones. En JavaScript moderno, se prefieren otros patrones como la composición o el uso 
+de mixins para lograr funcionalidad similar a la herencia múltiple de una manera más flexible y mantenible.
+ */
