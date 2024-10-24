@@ -42,12 +42,55 @@ pepe.adios()
    function Agente(nombre) {
     // heredar el constructor de las personas
     // ejecutar el constructor de las personas, pero con mi "this"
-    Persona.call(this, nombre)
+    Persona.call(this, nombre) //super
   }
+/**Esta línea es equivalente a usar super(nombre) en las clases modernas de JavaScript.
+call es un método que permite llamar a una función con un this específico y argumentos.
+En este caso, estamos llamando al constructor de Persona con el this de Agente y pasando el argumento nombre.
+Esto asegura que el constructor de Persona se ejecute en el contexto del nuevo objeto Agente, inicializando sus propiedades. */
 /* Heredar las propiedades del prototipo de Persona */
-/* Esto establece la cadena de prototipos para que Agente herede de Persona */
+/* Esto establece la cadena de prototipos para que Agente herede de Persona 
+class Persona {
+  constructor(nombre) {
+    this.nombre = nombre
+    this.apellido = 'Perez'
+  }
+
+  saluda() {
+    console.log('Hola soy', this.nombre)
+  }
+}
+
+class Agente extends Persona {
+  constructor(nombre) {
+    super(nombre)
+  }
+}
+Aquí está la explicación:
+class Persona: Define la clase base.
+class Agente extends Persona:
+extends indica que Agente hereda de Persona.
+Esto es equivalente a Object.setPrototypeOf(Agente.prototype, Persona.prototype) en el enfoque de prototipos.
+constructor(nombre):
+Es equivalente a la función Agente(nombre) en el enfoque de prototipos.
+super(nombre):
+Llama al constructor de la clase padre (Persona).
+Es equivalente a Persona.call(this, nombre) en el enfoque de prototipos.
+La clase Agente hereda automáticamente el método saluda() de Persona.
+La palabra clave extends simplifica significativamente la implementación de la herencia. 
+Hace que el código sea más legible y fácil de entender, ocultando los detalles complejos de la 
+manipulación de prototipos que vimos en el archivo original.
+Esta sintaxis de clases es "azúcar sintáctico" sobre el sistema de prototipos de JavaScript, 
+lo que significa que internamente JavaScript sigue usando prototipos, pero nos proporciona una 
+forma más clara y familiar de escribir código orientado a objetos.
+
+*/
 Object.setPrototypeOf(Agente.prototype, Persona.prototype)
 
+/**En la sintaxis de clases modernas, esto se logra automáticamente con class Agente extends Persona. 
+ * En el PDF, aparece referenciado el extends 
+ * 
+ * */
 /* Creación de una instancia de Agente */
 const smith = new Agente('Smith')
 
