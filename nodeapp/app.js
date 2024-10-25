@@ -6,6 +6,8 @@ import createError from 'http-errors' // Importa el módulo http-errors para cre
 
 import logger from 'morgan' // Importa el módulo morgan para logging de solicitudes HTTP
 
+import * as homeController from './controllers/homeController.js' // Importa el controlador de la página de inicio
+
 //-------------------------------------------------------------------------------------------------------------
 
 const app = express(); // Crea una instancia de la aplicación Express
@@ -17,21 +19,16 @@ const app = express(); // Crea una instancia de la aplicación Express
  * El modo 'dev' proporciona logs concisos y coloreados.
  */
 app.use(logger('dev'))
+app.use(express.static('public')) //Configura el middleware para servir archivos estáticos desde la carpeta 'public'
 
 
 //-------------------------------------------------------------------------------------------------------------
 
-//app.get('/', ...): Establece una ruta para manejar solicitudes GET a la raíz (/). 
+/**
+ * Application routes: Definición de rutas de la aplicación
+ */
 
-app.get('/', (req, res, next) => {
-// Esta ruta lanza un error intencionalmente para demostrar el manejo de errores.
-    throw new Error('fatal'),  // Lanza un error intencionalmente; el siguiente código no se ejecutará.
-
-    // Cuando se accede a esta ruta,responde con "Hola".
-    res.send('Hola'); // Define una ruta que responde con "Hola" cuando se accede a la raíz
-    // Esta línea no se alcanzará debido al error lanzado.
-}); 
-
+app.get('/', homeController.index)
 
 //-------------------------------------------------------------------------------------------------------------
 app.get('/user', (req, res, next) => {
@@ -43,7 +40,7 @@ app.get('/user', (req, res, next) => {
    * Define una segunda ruta GET para '/user'.
    * Esta ruta envía una respuesta al cliente.
    */
-    app.get('/user', (req, res, next) => {
+app.get('/user', (req, res, next) => {
     res.send('2222')
     })
 
@@ -51,7 +48,7 @@ app.get('/user', (req, res, next) => {
    * Middleware para manejar rutas no encontradas (404).
    * Crea un error 404 y lo pasa al manejador de errores.
    */
-    app.use((req, res, next) => {
+app.use((req, res, next) => {
     next(createError(404))
     })
 
@@ -73,10 +70,10 @@ El manejador de errores es un Middleware especial que toma cuatro argumentos en 
     // se borra para añadir otras...*/
 
     //Procesa los errores capturados y envía una respuesta al cliente.
-    app.use((err, req, res, next) => {
-        res.status(err.status || 500)
-        res.send('Ocurrió un error: ' + err.message)
-    })
+app.use((err, req, res, next) => {
+    res.status(err.status || 500)
+    res.send('Ocurrió un error: ' + err.message)
+})
     
 
 //-------------------------------------------------------------------------------------------------------------
