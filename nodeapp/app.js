@@ -4,8 +4,22 @@ import express from 'express'; // Importa el framework Express para crear aplica
 
 import createError from 'http-errors' // Importa el módulo http-errors para crear errores HTTP
 
+import logger from 'morgan' // Importa el módulo morgan para logging de solicitudes HTTP
+
+//-------------------------------------------------------------------------------------------------------------
+
 const app = express(); // Crea una instancia de la aplicación Express
 
+//-------------------------------------------------------------------------------------------------------------
+
+/**
+ * Configura el middleware morgan para logging de solicitudes HTTP.
+ * El modo 'dev' proporciona logs concisos y coloreados.
+ */
+app.use(logger('dev'))
+
+
+//-------------------------------------------------------------------------------------------------------------
 
 //app.get('/', ...): Establece una ruta para manejar solicitudes GET a la raíz (/). 
 
@@ -18,7 +32,8 @@ app.get('/', (req, res, next) => {
     // Esta línea no se alcanzará debido al error lanzado.
 }); 
 
-//----------------------------------------------------------------------------
+
+//-------------------------------------------------------------------------------------------------------------
 app.get('/user', (req, res, next) => {
     console.log('petición a /user')
     next()
@@ -31,7 +46,7 @@ app.get('/user', (req, res, next) => {
     app.get('/user', (req, res, next) => {
     res.send('2222')
     })
-  
+
     /**
    * Middleware para manejar rutas no encontradas (404).
    * Crea un error 404 y lo pasa al manejador de errores.
@@ -39,7 +54,7 @@ app.get('/user', (req, res, next) => {
     app.use((req, res, next) => {
     next(createError(404))
     })
-  
+
 
 
 // error handler:  Se conoce como "Error Handling Middleware".
@@ -56,7 +71,7 @@ El manejador de errores es un Middleware especial que toma cuatro argumentos en 
     res.send('Ocurrió un error: ' + err.message) 
     }) // Envía un mensaje de error al cliente. 
     // se borra para añadir otras...*/
-    
+
     //Procesa los errores capturados y envía una respuesta al cliente.
     app.use((err, req, res, next) => {
         res.status(err.status || 500)
@@ -64,7 +79,6 @@ El manejador de errores es un Middleware especial que toma cuatro argumentos en 
     })
     
 
-
-
+//-------------------------------------------------------------------------------------------------------------
 /* Exporta la aplicación Express configurada */
 export default app
