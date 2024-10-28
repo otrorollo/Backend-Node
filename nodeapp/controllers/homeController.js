@@ -21,6 +21,17 @@ export function index(req, res, next) {
     //     appName: 'NodeApp' 
     //  })
 // }
-    res.locals.nombre = 'Javier' /** Define una variable local para esta respuesta específica */
-        res.render('home')
+//    res.locals.nombre = 'Javier' /** Define una variable local para esta respuesta específica */
+//        res.render('home')
+//}
+const now = new Date()
+  res.locals.nombre = '<script>alert("inyeccion de codigo")</script>' /** Ejemplo de inyección de código (será escapado por EJS) */
+  res.locals.esPar = (now.getSeconds() % 2) === 0 /** Determina si el segundo actual es par */
+  res.locals.segundoActual = now.getSeconds()   /** Obtiene el segundo actual */
+  /** Array de usuarios para demostrar bucles en EJS */
+  res.locals.users = [ 
+    { name: 'Smith', age: 30 },
+    { name: 'Brown', age: 42 },
+  ]
+  res.render('home')
 }

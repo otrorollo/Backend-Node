@@ -1,12 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= appName %></title>
-</head>
-<body>
-  <%= appName %>
-  Hola soy <%= nombre %>  <!-- Muestra el nombre definido localmente para esta respuesta -->
-</body>
-</html> 
+<% include('header.ejs') %>
+  <h1><%= appName %></h1> <!-- Ejemplo de escape automático de EJS para prevenir XSS -->
+  <p>Ejemplo de inyección de código <%= nombre %></p>
+  <h2>Condicionales</h2>
+<!-- Ejemplo de condicional en EJS -->
+  <p>El segundo actual es: <%= segundoActual %></p>
+  <% if (esPar) { %>
+    <p>El segundo actual es par.</p>
+  <% } else { %>
+    <p>El segundo actual es impar.</p>
+  <% } %>
+  <h2>Bucles</h2>
+  <!-- Ejemplo de bucle en EJS -->
+  <% users.forEach(user => { %>
+    <p><%= user.name %> tiene <%= user.age %> años.</p>
+  <% }) %>
+<% include('footer.ejs') %>
