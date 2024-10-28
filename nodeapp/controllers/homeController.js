@@ -17,7 +17,10 @@ next es una función que se usa para pasar el control al siguiente middleware, a
 En este caso, la función simplemente envía 'Hola' como respuesta cuando alguien visita la página principal.
  *  */    
 export function index(req, res, next) {
-    res.render('home', { /** Renderiza la vista 'home' con datos dinámicos */
-        appName: 'NodeApp' 
-    })
+ //   res.render('home', { /** Renderiza la vista 'home' con datos dinámicos */
+    //     appName: 'NodeApp' 
+    //  })
+// }
+    res.locals.nombre = 'Javier' /** Define una variable local para esta respuesta específica */
+        res.render('home')
 }

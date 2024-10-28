@@ -8,6 +8,7 @@ Primera toma de contacto - Lo subo todo en un primer commit
 
 Esto activa el modo estricto en JavaScript.
 Propósito: Ayuda a prevenir errores comunes y hace que el código sea más seguro y optimizable.
+En el package.json al poner type: module , ya quedaria como estricto y no haria falta mencionarlo en el js.
 
 ## "Azúcar sintáctico":
 

@@ -13,6 +13,9 @@ import * as homeController from './controllers/homeController.js' // Importa el 
 const app = express(); // Crea una instancia de la aplicación Express
 
 //-------------------------------------------------------------------------------------------------------------
+
+app.locals.appName = 'NodeApp!!!!'/** Define una variable global para la aplicación */
+
 /** Configura el directorio de vistas */
 app.set('views', 'views') // views folder
 app.set('view engine', 'ejs') /** Establece EJS como el motor de plantillas */
