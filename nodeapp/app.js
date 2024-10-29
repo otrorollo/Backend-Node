@@ -35,8 +35,15 @@ app.use(express.static('public')) //Configura el middleware para servir archivos
  */
 
 app.get('/', homeController.index)
+/** 
+ * Ruta para demostrar parámetros en la URL
+ * El :num en la ruta captura cualquier valor en esa posición
+ */
+app.get('/param_in_route/:num', homeController.paranInRouteExample)
+
 
 //-------------------------------------------------------------------------------------------------------------
+/**  Dia 28 Lunes: se borran estas lineas
 app.get('/user', (req, res, next) => {
     console.log('petición a /user')
     next()
@@ -45,10 +52,11 @@ app.get('/user', (req, res, next) => {
 /**
    * Define una segunda ruta GET para '/user'.
    * Esta ruta envía una respuesta al cliente.
-   */
+
 app.get('/user', (req, res, next) => {
     res.send('2222')
     })
+hasta aqui */
 
     /**
    * Middleware para manejar rutas no encontradas (404).
