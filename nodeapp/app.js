@@ -61,6 +61,7 @@ app.use((req, res, next) => {
 
 
 // error handler:  Se conoce como "Error Handling Middleware".
+
 /**En Express.js: un Middleware es una función que tiene acceso al objeto de solicitud (req), al objeto de respuesta (res), y a la siguiente función de middleware en el ciclo de solicitud-respuesta de la aplicación (next).
 El manejador de errores es un Middleware especial que toma cuatro argumentos en lugar de tres: (err, req, res, next). */
 // error handler
@@ -77,8 +78,18 @@ El manejador de errores es un Middleware especial que toma cuatro argumentos en 
 
     //Procesa los errores capturados y envía una respuesta al cliente.
 app.use((err, req, res, next) => {
+    /** Establece el código de estado de la respuesta */
     res.status(err.status || 500)
-    res.send('Ocurrió un error: ' + err.message)
+   // res.send('Ocurrió un error: ' + err.message)  //quitamos esta linea en clase Lunes dia 28.
+// set locals, only providing error in development
+/** Establece variables locales para la vista de error */
+res.locals.message = err.message
+
+ /** Muestra detalles del error solo en modo desarrollo */
+res.locals.error = process.env.NODEAPP_ENV === 'development' ? err : {}
+// render error view
+res.render('error')
+
 })
     
 
