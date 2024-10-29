@@ -39,8 +39,9 @@ app.get('/', homeController.index)
  * Ruta para demostrar parámetros en la URL
  * El :num en la ruta captura cualquier valor en esa posición
  */
-app.get('/param_in_route/:num', homeController.paranInRouteExample)
-
+app.get('/param_in_route/:num?', homeController.paranInRouteExample)
+//El :num? en la ruta hace que el parámetro 'num' sea opcional
+// Esto permite que la ruta funcione con o sin el parámetro
 
 //-------------------------------------------------------------------------------------------------------------
 /**  Dia 28 Lunes: se borran estas lineas
