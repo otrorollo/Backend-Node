@@ -65,7 +65,14 @@ app.get('/param_in_route_multiple/:product/size/:size([0-9]+)/color/:color',
 app.get('/param_in_query', homeController.paramInQuery)   
 app.post('/create-example', homeController.createExample)  //Ruta POST para crear un ejemplo
 // Utiliza el controlador createExample de homeController
-
+/**
+ * Ruta para demostrar la validación de parámetros de consulta
+ * Utiliza middleware de validación antes de ejecutar el controlador principal
+ */
+app.get('/validate-query-example',
+    homeController.validateQueryExampleValidations,
+    homeController.validateQueryExample
+)
 
 
 //-------------------------------------------------------------------------------------------------------------
@@ -112,6 +119,19 @@ El manejador de errores es un Middleware especial que toma cuatro argumentos en 
 
     //Procesa los errores capturados y envía una respuesta al cliente.
 app.use((err, req, res, next) => {
+    /**
+ * Manejador de errores mejorado para errores de validación
+ * Formatea los errores de validación para una respuesta más clara
+ */
+if (err.array) {
+    console.log(err.array())
+    err.message = 'Invalid request: ' + err.array()
+        .map(e => `${e.location} ${e.type} ${e.path} ${e.msg}`)
+        .join(', ')
+    err.status = 422
+}
+
+
     /** Establece el código de estado de la respuesta */
     res.status(err.status || 500)
    // res.send('Ocurrió un error: ' + err.message)  //quitamos esta linea en clase Lunes dia 28.

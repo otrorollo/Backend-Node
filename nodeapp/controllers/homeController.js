@@ -1,3 +1,6 @@
+import assert from 'node:assert'
+import { query, validationResult } from 'express-validator'
+
 /**
  * Los comentarios son parte de un estilo de documentación llamado JSDoc
  * 
@@ -68,6 +71,34 @@ export function paramInQuery(req, res, next) {
 export function createExample(req, res, next) {
     /** Extrae el ítem del cuerpo de la solicitud */
     const item = req.body.item
+
+    // validation
+assert(item, 'item is required')
+
     /** Envía una respuesta con el ítem recibido */
     res.send('Received ' + item)
+}
+
+/**
+ * Middleware de validación para la ruta '/validate-query-example'
+ * Define reglas de validación para los parámetros de consulta
+ */
+export const validateQueryExampleValidations = [
+    query('param1')
+        .isLength({ min: 4 })
+        .withMessage('min 4 characters'),
+    query('param2')
+        .isNumeric()
+        .withMessage('must be numeric')
+]
+
+/**
+ * Controlador para la ruta '/validate-query-example'
+ * Ejecuta las validaciones y maneja la respuesta
+ */
+export function validateQueryExample(req, res, next) {
+    validationResult(req).throw()  // Lanza un error si hay fallos de validación
+    const param1 = req.query.param1
+    const param2 = req.query.param2
+    res.send(`Validated ${param1} ${param2}`)
 }
