@@ -27,7 +27,8 @@ app.set('view engine', 'ejs') /** Establece EJS como el motor de plantillas */
 app.use(logger('dev'))
 
 app.use(express.json()) // Middleware para parsear el body que venga en formato JSON
-app.use(express.urlencoded()) //Middleware para  parsear el body que venga urlencoded (formularios)
+app.use(express.urlencoded({ extended: false })) //Middleware para  parsear el body que venga urlencoded (formularios)
+// La opción 'extended: false' utiliza la librería querystring para el parseo
 
 app.use(express.static('public')) //Configura el middleware para servir archivos estáticos desde la carpeta 'public'
 
