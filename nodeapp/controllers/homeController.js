@@ -64,3 +64,10 @@ export function paramInQuery(req, res, next) {
     const color = req.query.color
     res.send(`Received size ${size} color ${color}`)
 }
+// POST /create-example
+export function createExample(req, res, next) {
+    /** Extrae el ítem del cuerpo de la solicitud */
+    const item = req.body.item
+    /** Envía una respuesta con el ítem recibido */
+    res.send('Received ' + item)
+}

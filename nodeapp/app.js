@@ -25,6 +25,10 @@ app.set('view engine', 'ejs') /** Establece EJS como el motor de plantillas */
  * El modo 'dev' proporciona logs concisos y coloreados.
  */
 app.use(logger('dev'))
+
+app.use(express.json()) // Middleware para parsear el body que venga en formato JSON
+app.use(express.urlencoded()) //Middleware para  parsear el body que venga urlencoded (formularios)
+
 app.use(express.static('public')) //Configura el middleware para servir archivos estáticos desde la carpeta 'public'
 
 
@@ -58,6 +62,10 @@ app.get('/param_in_route_multiple/:product/size/:size([0-9]+)/color/:color',
  * Ejemplo de uso: /param_in_query?size=S&color=blue
  */
 app.get('/param_in_query', homeController.paramInQuery)   
+app.post('/create-example', homeController.createExample)  //Ruta POST para crear un ejemplo
+// Utiliza el controlador createExample de homeController
+
+
 
 //-------------------------------------------------------------------------------------------------------------
 /**  Dia 28 Lunes: se borran estas lineas
