@@ -124,7 +124,7 @@ app.use((err, req, res, next) => {
  * Formatea los errores de validación para una respuesta más clara
  */
 if (err.array) {
-    console.log(err.array())
+    
     err.message = 'Invalid request: ' + err.array()
         .map(e => `${e.location} ${e.type} ${e.path} ${e.msg}`)
         .join(', ')

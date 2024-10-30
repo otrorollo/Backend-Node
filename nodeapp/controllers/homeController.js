@@ -89,7 +89,14 @@ export const validateQueryExampleValidations = [
         .withMessage('min 4 characters'),
     query('param2')
         .isNumeric()
-        .withMessage('must be numeric')
+        .withMessage('must be numeric'),
+/** 
+   * Nueva validación personalizada para param3
+   * Verifica que el valor sea exactamente '42'
+   */
+    query('param3')
+        .custom(value => value === '42')
+        .withMessage('must be 42')
 ]
 
 /**
