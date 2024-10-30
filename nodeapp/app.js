@@ -48,7 +48,9 @@ app.get('/param_in_route/:num?', homeController.paranInRouteExample)
  * Ruta para demostrar múltiples parámetros en la URL
  * Captura tres parámetros: product, size y color
  */
-app.get('/param_in_route_multiple/:product/size/:size/color/:color',
+app.get('/param_in_route_multiple/:product/size/:size([0-9]+)/color/:color', 
+//El parámetro 'size' ahora incluye una expresión regular para validación
+
     homeController.paranInRouteMultipleExample)
 
 /**
