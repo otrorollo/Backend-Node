@@ -43,6 +43,15 @@ app.get('/param_in_route/:num?', homeController.paranInRouteExample)
 //El :num? en la ruta hace que el parámetro 'num' sea opcional
 // Esto permite que la ruta funcione con o sin el parámetro
 
+
+/**
+ * Ruta para demostrar múltiples parámetros en la URL
+ * Captura tres parámetros: product, size y color
+ */
+app.get('/param_in_route_multiple/:product/size/:size/color/:color',
+    homeController.paranInRouteMultipleExample)
+
+
 //-------------------------------------------------------------------------------------------------------------
 /**  Dia 28 Lunes: se borran estas lineas
 app.get('/user', (req, res, next) => {
@@ -65,10 +74,10 @@ hasta aqui */
    */
 app.use((req, res, next) => {
     next(createError(404))
-    })
+})
 
 
-
+//-------------------------------------------------------------------------------------------------------------
 // error handler:  Se conoce como "Error Handling Middleware".
 
 /**En Express.js: un Middleware es una función que tiene acceso al objeto de solicitud (req), al objeto de respuesta (res), y a la siguiente función de middleware en el ciclo de solicitud-respuesta de la aplicación (next).

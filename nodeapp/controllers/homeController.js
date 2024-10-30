@@ -36,10 +36,23 @@ const now = new Date()
     ]
     res.render('home')
 }
-
+// GET /param_in_route/44
 export function paranInRouteExample(req, res, next) {
     /** Extrae el parámetro 'num' de la URL */
     const num = req.params.num
     /** Envía una respuesta con el número recibido */
     res.send('Received ' + num)
     }
+
+
+// Manejador para la ruta con múltiples parámetros en la URL
+
+export function paranInRouteMultipleExample(req, res, next) {
+    /** Extrae los parámetros 'product', 'size' y 'color' de la URL */
+    const product = req.params.product
+    const size = req.params.size
+    const color = req.params.color
+
+    /** Envía una respuesta con los parámetros recibidos */
+    res.send(`Received ${product} size ${size} color ${color}`)
+}
