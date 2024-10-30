@@ -51,6 +51,11 @@ app.get('/param_in_route/:num?', homeController.paranInRouteExample)
 app.get('/param_in_route_multiple/:product/size/:size/color/:color',
     homeController.paranInRouteMultipleExample)
 
+/**
+ * Ruta para demostrar parámetros en la query string de la URL
+ * Ejemplo de uso: /param_in_query?size=S&color=blue
+ */
+app.get('/param_in_query', homeController.paramInQuery)   
 
 //-------------------------------------------------------------------------------------------------------------
 /**  Dia 28 Lunes: se borran estas lineas

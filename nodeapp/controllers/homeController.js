@@ -56,3 +56,11 @@ export function paranInRouteMultipleExample(req, res, next) {
     /** Envía una respuesta con los parámetros recibidos */
     res.send(`Received ${product} size ${size} color ${color}`)
 }
+
+// GET /param_in_query?size=S&color=blue
+//xtrae los parámetros 'size' y 'color' de la query string
+export function paramInQuery(req, res, next) {
+    const size = req.query.size
+    const color = req.query.color
+    res.send(`Received size ${size} color ${color}`)
+}
