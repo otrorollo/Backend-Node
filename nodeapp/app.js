@@ -11,7 +11,7 @@ import * as homeController from './controllers/homeController.js' // Importa el 
 
 import connectMongoose from './lib/connectMongoose.js'
 /** Conectar a la base de datos MongoDB */
-await connectMongoose() //para que espere a que se conecte
+await connectMongoose() //para que espere a que se conecte - top level await
 console.log('Conectado a MongoDB.') //Informar al usuario cuando la conexión se ha establecido exitosamente.
 
 

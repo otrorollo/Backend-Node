@@ -1,5 +1,6 @@
 import assert from 'node:assert'
 import { query, validationResult } from 'express-validator'
+import Agent from '../models/Agent.js'
 
 /**
  * Los comentarios son parte de un estilo de documentación llamado JSDoc
@@ -19,8 +20,11 @@ res (response) es un objeto que usas para enviar la respuesta al cliente.
 next es una función que se usa para pasar el control al siguiente middleware, aunque no se usa en este ejemplo.
 En este caso, la función simplemente envía 'Hola' como respuesta cuando alguien visita la página principal.
  *  */    
+
+
 // GET /
-export function index(req, res, next) {
+export async function index(req, res, next) {
+//export function index(req, res, next) {
  //   res.render('home', { /** Renderiza la vista 'home' con datos dinámicos */
     //     appName: 'NodeApp' 
     //  })
@@ -29,14 +33,15 @@ export function index(req, res, next) {
 //        res.render('home')
 //}
 const now = new Date()
-  res.locals.nombre = '<script>alert("inyeccion de codigo")</script>' /** Ejemplo de inyección de código (será escapado por EJS) */
-  res.locals.esPar = (now.getSeconds() % 2) === 0 /** Determina si el segundo actual es par */
-  res.locals.segundoActual = now.getSeconds()   /** Obtiene el segundo actual */
-  /** Array de usuarios para demostrar bucles en EJS */
-    res.locals.users = [ 
-    { name: 'Smith', age: 30 },
-    { name: 'Brown', age: 42 },
-    ]
+    res.locals.nombre = '<script>alert("inyeccion de codigo")</script>' /** Ejemplo de inyección de código (será escapado por EJS) */
+    res.locals.esPar = (now.getSeconds() % 2) === 0 /** Determina si el segundo actual es par */
+    res.locals.segundoActual = now.getSeconds()   /** Obtiene el segundo actual */
+    /** Array de usuarios para demostrar bucles en EJS */
+    //ahora ponemos agetns para que entre en la base de datos
+    res.locals.agents = await Agent.find()
+
+
+
     res.render('home')
 }
 // GET /param_in_route/44
