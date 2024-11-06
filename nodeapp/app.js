@@ -8,6 +8,14 @@ import logger from 'morgan' // Importa el módulo morgan para logging de solicit
 
 import * as homeController from './controllers/homeController.js' // Importa el controlador de la página de inicio
 
+
+import connectMongoose from './lib/connectMongoose.js'
+/** Conectar a la base de datos MongoDB */
+await connectMongoose() //para que espere a que se conecte
+console.log('Conectado a MongoDB.') //Informar al usuario cuando la conexión se ha establecido exitosamente.
+
+
+
 //-------------------------------------------------------------------------------------------------------------
 
 const app = express(); // Crea una instancia de la aplicación Express

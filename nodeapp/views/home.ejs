@@ -1,6 +1,7 @@
 <% include('header.ejs') %>
   <h1><%= appName %></h1> <!-- Ejemplo de escape automático de EJS para prevenir XSS -->
   <p>Ejemplo de inyección de código <%= nombre %></p>
+
   <h2>Condicionales</h2>
 <!-- Ejemplo de condicional en EJS -->
   <p>El segundo actual es: <%= segundoActual %></p>
@@ -9,6 +10,7 @@
   <% } else { %>
     <p>El segundo actual es impar.</p>
   <% } %>
+  
   <h2>Bucles</h2>
   <!-- Ejemplo de bucle en EJS -->
   <% users.forEach(user => { %>
