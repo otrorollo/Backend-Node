@@ -3,6 +3,7 @@
 import readline from 'node:readline'
 import connectMongoose from './lib/connectMongoose.js'
 import Agent from './models/Agent.js'
+import User from './models/User.js' // Importamos el modelo de Usuario
 
 // Conectar a la base de datos MongoDB
 const connection = await connectMongoose()
@@ -22,6 +23,7 @@ await initAgents()
  * - Elimina todos los agentes existentes
  * - Crea nuevos agentes con datos de prueba
  */
+//--------------------------------------------------------------------------------
 async function initAgents() {
   // delete all agents - Eliminar todos los agentes existentes
   const deleteResult = await Agent.deleteMany()
@@ -33,6 +35,32 @@ async function initAgents() {
     { name: 'Jones', age: 23 }
   ])
   console.log(`Created ${insertResult.length} agents.`)
+}
+//--------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------
+await initUsers() // Inicializamos los usuarios después de los agentes
+connection.close() // Cerramos la conexión a la base de datos al finalizar
+
+/**
+ * Función asíncrona para inicializar usuarios de prueba en la base de datos
+ */
+async function initUsers() { //Define una función asíncrona para inicializar usuarios.
+  // Eliminar todos los usuarios existentes
+  const deleteResult = await User.deleteMany()
+  console.log(`Deleted ${deleteResult.deletedCount} users.`) //Informa cuántos usuarios se eliminaron
+
+  // Crear usuarios iniciales
+  const insertResult = await User.insertMany([
+    { 
+      email: 'admin@example.com', 
+      password: await User.hashPassword('1234') // Hashear la contraseña antes de guardarla
+    },
+    { 
+      email: 'user1@example.com', 
+      password: await User.hashPassword('1234') // Hashear la contraseña antes de guardarla
+    },
+  ])
+  console.log(`Created ${insertResult.length} users.`) //Informa cuántos usuarios nuevos se crearon.
 }
 
 /**
