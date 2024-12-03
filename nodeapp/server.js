@@ -24,5 +24,5 @@ const server = http.createServer(app);  // Crea un servidor HTTP utilizando la i
  */
 server.on('error', err => console.error(err))
 // Muestra un mensaje en la consola cuando el servidor comienza a escuchar en el puerto especificado
-server.on('listening', () => { debug('Servidor arrancado en puerto ${port}')}); 
+server.on('listening', () => { debug(`Servidor arrancado en puerto ${port}`)}); //fijate que no son comillas simples - son comillas invertidas backticks- asi si muestra el numero del puerto.
 server.listen(port)// Inicia el servidor para que escuche en el puerto definido
