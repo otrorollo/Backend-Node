@@ -28,3 +28,14 @@ export function useSessionInViews(req, res, next) {
   res.locals.session = req.session
   next()
 }
+
+export function isLoggedIn(req, res, next) {
+  // Verifica si el ID de usuario está presente en la sesión
+  if (!req.session.userId) {
+    // Si no está autenticado, redirige a la página de login
+    res.redirect('/login')
+    return
+  }
+  // Si está autenticado, continúa con la siguiente función middleware o ruta
+  next()
+}

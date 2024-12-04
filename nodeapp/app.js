@@ -45,38 +45,33 @@ app.use(express.static('public')) //Configura el middleware para servir archivos
  * Aplica el middleware de sesión y hace disponible la sesión en las vistas
  */
 app.use(sessionManager.middleware, sessionManager.useSessionInViews)
+//-------------------------------------------------------------------------------------------------------------
 
-app.get('/', homeController.index)
-/** 
- * Ruta para demostrar parámetros en la URL
- * El :num en la ruta captura cualquier valor en esa posición
- */
+// public pages:
 
+app.get('/', homeController.index) //Ruta para demostrar parámetros en la URL - 
 app.get('/login', loginController.index)
-
-/**
- * Ruta POST para manejar el envío del formulario de login
- */
-app.post('/login', loginController.postLogin)
-
+app.post('/login', loginController.postLogin)//Ruta POST para manejar el envío del formulario de login
 app.all('/logout', loginController.logout)
+//-------------------------------------------------------------------------------------------------------------
 
-app.get('/agents/new', agentsController.index) //Ruta GET para mostrar el formulario de creación de un nuevo agente
+// private pages:
+//Ruta GET para mostrar el formulario de creación de un nuevo agente
+app.get('/agents/new', sessionManager.isLoggedIn, agentsController.index) 
+// Se utiliza el middleware isLoggedIn para verificar si el usuario está autenticado
 
-app.get('/param_in_route/:num?', homeController.paranInRouteExample)
-//El :num? en la ruta hace que el parámetro 'num' sea opcional
+//examples: 
+app.get('/param_in_route/:num?', homeController.paranInRouteExample) 
+//El :num? en la ruta hace que el parámetro 'num' sea opcional -El :num en la ruta captura cualquier valor en esa posición
 // Esto permite que la ruta funcione con o sin el parámetro
 
 
 /**
  * Ruta para demostrar múltiples parámetros en la URL
  * Captura tres parámetros: product, size y color
- */
+ *///El parámetro 'size' ahora incluye una expresión regular para validación
 app.get('/param_in_route_multiple/:product/size/:size([0-9]+)/color/:color', 
-//El parámetro 'size' ahora incluye una expresión regular para validación
-
-    homeController.paranInRouteMultipleExample)
-
+homeController.paranInRouteMultipleExample)
 /**
  * Ruta para demostrar parámetros en la query string de la URL
  * Ejemplo de uso: /param_in_query?size=S&color=blue
