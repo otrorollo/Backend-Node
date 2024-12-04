@@ -55,6 +55,11 @@ app.get('/', homeController.index)
 
 app.get('/login', loginController.index)
 
+/**
+ * Ruta POST para manejar el envío del formulario de login
+ */
+app.post('/login', loginController.postLogin)
+
 
 app.get('/param_in_route/:num?', homeController.paranInRouteExample)
 //El :num? en la ruta hace que el parámetro 'num' sea opcional
