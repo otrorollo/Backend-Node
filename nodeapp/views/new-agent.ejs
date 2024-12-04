@@ -1,0 +1,24 @@
+<%- include('header.ejs') %> <!-- Incluye el header común a todas las vistas -->
+
+<div class="container">
+
+  <h1>New Agent</h1>
+
+  <form method="POST"> <!-- Formulario para crear un nuevo agente -->
+
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Name</label>
+      <input type="text" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    </div>
+
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Age</label>
+      <input type="number" name="age" class="form-control" id="exampleInputPassword1">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+
+  </form>
+</div>
+
+<%- include('footer.ejs') %> <!-- Incluye el footer común a todas las vistas -->

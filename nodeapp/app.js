@@ -1,22 +1,18 @@
 //me lo traigo de server - el import el const app y app.get 
 
 import express from 'express'; // Importa el framework Express para crear aplicaciones web 
-
 import createError from 'http-errors' // Importa el módulo http-errors para crear errores HTTP
-
 import logger from 'morgan' // Importa el módulo morgan para logging de solicitudes HTTP
-
 import * as homeController from './controllers/homeController.js' // Importa el controlador de la página de inicio
-
 import connectMongoose from './lib/connectMongoose.js'
 /** Conectar a la base de datos MongoDB */
-await connectMongoose() //para que espere a que se conecte - top level await
+import * as sessionManager from './lib/sessionManager.js'//Importa el módulo de gestión de sesiones
 console.log('Conectado a MongoDB.') //Informar al usuario cuando la conexión se ha establecido exitosamente.
-
 import * as loginController from './controllers/loginController.js'
-import * as sessionManager from './lib/sessionManager.js' //Importa el módulo de gestión de sesiones
-
+import * as agentsController from './controllers/agentsController.js' //Importa el controlador agentsController para manejar las rutas relacionadas con agentes
 //-------------------------------------------------------------------------------------------------------------
+await connectMongoose() //para que espere a que se conecte - top level await
+
 
 const app = express(); // Crea una instancia de la aplicación Express
 
@@ -25,8 +21,9 @@ const app = express(); // Crea una instancia de la aplicación Express
 app.locals.appName = 'NodeApp'/** Define una variable global para la aplicación */
 
 /** Configura el directorio de vistas */
+
 app.set('views', 'views') // views folder
-app.set('view engine', 'ejs') /** Establece EJS como el motor de plantillas */
+app.set('view engine', 'ejs') // Establece EJS como el motor de plantillas
 
 /**
  * Configura el middleware morgan para logging de solicitudes HTTP.
@@ -45,9 +42,6 @@ app.use(express.static('public')) //Configura el middleware para servir archivos
 
 /**
  * Application routes: Definición de rutas de la aplicación
- */
-
-/**
  * Aplica el middleware de sesión y hace disponible la sesión en las vistas
  */
 app.use(sessionManager.middleware, sessionManager.useSessionInViews)
@@ -67,7 +61,7 @@ app.post('/login', loginController.postLogin)
 
 app.all('/logout', loginController.logout)
 
-
+app.get('/agents/new', agentsController.index) //Ruta GET para mostrar el formulario de creación de un nuevo agente
 
 app.get('/param_in_route/:num?', homeController.paranInRouteExample)
 //El :num? en la ruta hace que el parámetro 'num' sea opcional
