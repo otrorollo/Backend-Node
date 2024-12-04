@@ -65,6 +65,9 @@ app.get('/login', loginController.index)
  */
 app.post('/login', loginController.postLogin)
 
+app.all('/logout', loginController.logout)
+
+
 
 app.get('/param_in_route/:num?', homeController.paranInRouteExample)
 //El :num? en la ruta hace que el parámetro 'num' sea opcional

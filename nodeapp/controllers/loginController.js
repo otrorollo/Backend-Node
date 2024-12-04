@@ -37,10 +37,19 @@ export async function postLogin(req, res, next) {
        */
     req.session.userId = user._id
     req.session.userName = user.email
-    
+
     //redirect a la home
     res.redirect('/')
     } catch (error) {
     next(error)
     }
+}
+
+export function logout(req, res, next) {
+   // Regenera la sesión para eliminar los datos de la sesión actual
+  req.session.regenerate(err => {
+    if (err) return next(err)
+      // Redirige al usuario a la página de inicio después del cierre de sesión
+    res.redirect('/')
+  })
 }

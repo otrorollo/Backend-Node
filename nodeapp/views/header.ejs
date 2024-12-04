@@ -26,7 +26,13 @@
           </li>
         </ul>
         <form class="d-flex" role="search">
-          <a href="/login" class="btn btn-outline-success" type="submit">Login</a>
+          <% if (session.userId) { %>
+            <!-- Muestra el botón de Logout si el usuario está autenticado -->
+            <a href="/logout" class="btn btn-outline-success" type="submit">Logout</a>
+            <% } else { %>
+            <!-- Muestra el botón de Login si el usuario no está autenticado -->
+            <a href="/login" class="btn btn-outline-success" type="submit">Login</a>
+          <% } %>
         </form>
       </div>
     </div>
