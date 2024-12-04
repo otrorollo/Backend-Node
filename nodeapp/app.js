@@ -8,12 +8,12 @@ import logger from 'morgan' // Importa el módulo morgan para logging de solicit
 
 import * as homeController from './controllers/homeController.js' // Importa el controlador de la página de inicio
 
-
 import connectMongoose from './lib/connectMongoose.js'
 /** Conectar a la base de datos MongoDB */
 await connectMongoose() //para que espere a que se conecte - top level await
 console.log('Conectado a MongoDB.') //Informar al usuario cuando la conexión se ha establecido exitosamente.
 
+import * as loginController from './controllers/loginController.js'
 
 
 //-------------------------------------------------------------------------------------------------------------
@@ -52,6 +52,10 @@ app.get('/', homeController.index)
  * Ruta para demostrar parámetros en la URL
  * El :num en la ruta captura cualquier valor en esa posición
  */
+
+app.get('/login', loginController.index)
+
+
 app.get('/param_in_route/:num?', homeController.paranInRouteExample)
 //El :num? en la ruta hace que el parámetro 'num' sea opcional
 // Esto permite que la ruta funcione con o sin el parámetro

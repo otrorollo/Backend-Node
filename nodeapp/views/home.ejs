@@ -1,20 +1,22 @@
 <%- include('header.ejs') %>
+<!-- Se envuelve el contenido en un contenedor de Bootstrap para mejorar el diseño -->
+<div class="container">
+    <!-- Ejemplo de escape automático de EJS para prevenir XSS -->
+    <p>Ejemplo de inyección de código <%= nombre %></p>
 
-<h1><%= appName %></h1>
-<!-- Ejemplo de escape automático de EJS para prevenir XSS -->
-<p>Ejemplo de inyección de código <%= nombre %></p>
+    <h2>Condicionales</h2>
+    <!-- Ejemplo de condicional en EJS -->
+      <p>El segundo actual es: <%= segundoActual %></p>
+    <% if (esPar) { %>
+      <p>El segundo actual es par.</p>
+    <% } else { %>
+      <p>El segundo actual es impar.</p>
+    <% } %>
 
-<h2>Condicionales</h2>
-<!-- Ejemplo de condicional en EJS -->
-<p>El segundo actual es: <%= segundoActual %></p>
-<% if (esPar) { %>
-<p>El segundo actual es par.</p>
-<% } else { %>
-<p>El segundo actual es impar.</p>
-<% } %>
-
-<h2>Bucles</h2>
-<!-- Ejemplo de bucle en EJS -->
-<% agents.forEach(agent => { %>
-<p><%= agent.name %> tiene <%= agent.age %> años.</p>
-<% }) %> <%- include('footer.ejs') %>
+    <h2>Bucles</h2>
+    <!-- Ejemplo de bucle en EJS -->
+    <% agents.forEach(agent => { %>
+      <p><%= agent.name %> tiene <%= agent.age %> años.</p>
+    <% }) %> 
+</div>
+<%- include('footer.ejs') %>
