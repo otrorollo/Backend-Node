@@ -29,7 +29,16 @@ export async function postLogin(req, res, next) {
       return
     }
 
-    //Sí el usuario existe y la contraseña coincide --> redirect a la home
+    //Sí el usuario existe y la contraseña coincide --> Apunta en su sesion que está logeado. 
+    /**
+       * Guarda la información del usuario en la sesión tras un login exitoso
+       * @param {Object} req - Objeto de solicitud Express
+       * @param {Object} user - Usuario autenticado
+       */
+    req.session.userId = user._id
+    req.session.userName = user.email
+    
+    //redirect a la home
     res.redirect('/')
     } catch (error) {
     next(error)

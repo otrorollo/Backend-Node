@@ -14,7 +14,7 @@ await connectMongoose() //para que espere a que se conecte - top level await
 console.log('Conectado a MongoDB.') //Informar al usuario cuando la conexión se ha establecido exitosamente.
 
 import * as loginController from './controllers/loginController.js'
-
+import * as sessionManager from './lib/sessionManager.js' //Importa el módulo de gestión de sesiones
 
 //-------------------------------------------------------------------------------------------------------------
 
@@ -46,6 +46,11 @@ app.use(express.static('public')) //Configura el middleware para servir archivos
 /**
  * Application routes: Definición de rutas de la aplicación
  */
+
+/**
+ * Aplica el middleware de sesión y hace disponible la sesión en las vistas
+ */
+app.use(sessionManager.middleware, sessionManager.useSessionInViews)
 
 app.get('/', homeController.index)
 /** 

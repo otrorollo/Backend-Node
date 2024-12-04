@@ -1,22 +1,32 @@
 <%- include('header.ejs') %>
+
 <!-- Se envuelve el contenido en un contenedor de Bootstrap para mejorar el diseño -->
 <div class="container">
-    <!-- Ejemplo de escape automático de EJS para prevenir XSS -->
-    <p>Ejemplo de inyección de código <%= nombre %></p>
 
-    <h2>Condicionales</h2>
-    <!-- Ejemplo de condicional en EJS -->
-      <p>El segundo actual es: <%= segundoActual %></p>
-    <% if (esPar) { %>
-      <p>El segundo actual es par.</p>
-    <% } else { %>
-      <p>El segundo actual es impar.</p>
-    <% } %>
+  <p>User ID: <%= session.userId %></p> <!-- Muestra el ID del usuario si está logado -->
 
+  <p>Ejemplo de inyección de código <%= nombre %></p> <!-- Ejemplo de escape automático de EJS para prevenir XSS -->
+
+  <h2>Condicionales</h2> 
+  <p>El segundo actual es: <%= segundoActual %></p>
+  <% if (esPar) { %>
+    <p>El segundo actual es par.</p>
+  <% } else { %>
+    <p>El segundo actual es impar.</p>
+  <% } %>
+
+  <% // contenido para usuarios NO logados %><!--Condicional para mostrar contenido según el estado de autenticación-->
+  <% if (!session.userId) { %>
+    <p>Para ver el contenido debes hacer <a href="/login">login</a></p>
+  <% } %>
+
+  <%# contenido para usuarios logados %>
+  <% if (session.userId) { %>
     <h2>Bucles</h2>
-    <!-- Ejemplo de bucle en EJS -->
-    <% agents.forEach(agent => { %>
+    <% agents.forEach(agent => { %> <!-- Ejemplo de bucle en EJS -->
       <p><%= agent.name %> tiene <%= agent.age %> años.</p>
-    <% }) %> 
+    <% }) %>
+  <% } %>
+
 </div>
 <%- include('footer.ejs') %>
