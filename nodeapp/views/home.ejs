@@ -24,7 +24,11 @@
   <% if (session.userId) { %>
     <h2>Bucles</h2>
     <% agents.forEach(agent => { %> <!-- Ejemplo de bucle en EJS -->
-      <p><%= agent.name %> tiene <%= agent.age %> años.</p>
+      <p>
+        <%= agent.name %> tiene <%= agent.age %> años.  
+        <!-- Añade un enlace para eliminar el agente -->
+        <a href="/agents/delete/<%= agent.id %>"><i class="bi bi-trash"></i></a>
+      </p>
     <% }) %>
   <% } %>
 

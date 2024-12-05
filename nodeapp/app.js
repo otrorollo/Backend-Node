@@ -65,8 +65,11 @@ app.post('/agents/new', sessionManager.isLoggedIn, agentsController.postNew)
  * Ruta POST para manejar la creación de un nuevo agente
  * Utiliza el middleware isLoggedIn para asegurar que solo usuarios autenticados puedan crear agentes
  */
+app.get('/agents/delete/:agentId', sessionManager.isLoggedIn, agentsController.deleteAgent)
+//Ruta para eliminar un agente -- Requiere que el usuario esté autenticado
 
 
+//-------------------------------------------------------------------------------------------------------------
 //examples: 
 app.get('/param_in_route/:num?', homeController.paranInRouteExample) 
 //El :num? en la ruta hace que el parámetro 'num' sea opcional -El :num en la ruta captura cualquier valor en esa posición
