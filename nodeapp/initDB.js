@@ -16,6 +16,12 @@ if (questionResponse.toLowerCase() !== 'yes') {
   process.exit()
 }
 
+await initUsers() //// Se mueve la línea de inicialización de agentes después de la inicialización de usuarios
+/**
+ * La inicialización de agentes se mueve después de la de usuarios porque necesitamos
+ * los IDs de los usuarios para asignarlos como propietarios de los agentes.
+ */
+
 // Inicializar los agentes en la base de datos
 await initAgents()
 /**
@@ -28,17 +34,25 @@ async function initAgents() {
   // delete all agents - Eliminar todos los agentes existentes
   const deleteResult = await Agent.deleteMany()
   console.log(`Deleted ${deleteResult.deletedCount} agents.`)
-  // create initial agents -  Crear agentes iniciales
+
+  //Busca los usuarios admin y user1 para usar sus IDs como propietarios de los agentes
+  const [admin, user1] = await Promise.all([
+    User.findOne({ email: 'admin@example.com' }),
+    User.findOne({ email: 'user1@example.com' }),
+  ])
+
+
+  // create initial agents -  Crear agentes iniciales - se le asignan como propietarios
   const insertResult = await Agent.insertMany([
-    { name: 'Smith', age: 31 },
-    { name: 'Brown', age: 42 },
-    { name: 'Jones', age: 23 }
+    { name: 'Smith', age: 31, owner:admin._id },
+    { name: 'Brown', age: 42, owner: admin._id } ,
+    { name: 'Jones', age: 23, owner: admin._id }
   ])
   console.log(`Created ${insertResult.length} agents.`)
 }
+
 //--------------------------------------------------------------------------------
-//--------------------------------------------------------------------------------
-await initUsers() // Inicializamos los usuarios después de los agentes
+
 connection.close() // Cerramos la conexión a la base de datos al finalizar
 
 /**

@@ -33,6 +33,8 @@ export async function index(req, res, next) {
 //        res.render('home')
 //}
 const now = new Date()
+const userId = req.session.userId //Obtiene el ID del usuario de la sesión actual
+
     res.locals.nombre = '<script>alert("inyeccion de codigo")</script>' /** Ejemplo de inyección de código (será escapado por EJS) */
     res.locals.esPar = (now.getSeconds() % 2) === 0 /** Determina si el segundo actual es par */
     res.locals.segundoActual = now.getSeconds()   /** Obtiene el segundo actual */
@@ -40,7 +42,9 @@ const now = new Date()
     //ahora ponemos agetns para que entre en la base de datos
     res.locals.agents = await Agent.find()
 
-
+    if (userId) {
+        res.locals.agents = await Agent.find({ owner: userId })
+    } // Si el usuario está autenticado, busca y asigna a la vista solo los agentes que pertenecen a este usuario
 
     res.render('home')
 }
