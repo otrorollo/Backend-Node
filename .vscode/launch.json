@@ -1,0 +1,47 @@
+{
+  // Use IntelliSense para saber los atributos posibles.
+  // Mantenga el puntero para ver las descripciones de los existentes atributos.
+  // Para más información, visite: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch program",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "cwd": "${workspaceFolder}/nodeapp",
+      "outputCapture":"std",
+      //alternativa con program
+      "program": "${workspaceFolder}/nodeapp/server.js",
+      "preLaunchTask": "kill-node",
+      "env": {
+        "DEBUG": "nodeapp:*",
+        "NODEAPP_ENV": "development",
+        "PORT":"3000"
+      },
+      
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch Npm",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "cwd": "${workspaceFolder}/nodeapp",
+      "outputCapture":"std",
+      //alternativa con npm
+      "runtimeExecutable": "npm",
+      "env":{
+        "PORT":"3000",
+      },
+      "runtimeArgs": [
+        "run",
+        "dev"
+      ],
+    }
+  ]
+}
