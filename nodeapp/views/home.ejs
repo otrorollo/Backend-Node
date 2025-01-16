@@ -15,22 +15,34 @@
     <p>El segundo actual es impar.</p>
   <% } %>
 
-  <% // contenido para usuarios NO logados %><!--Condicional para mostrar contenido según el estado de autenticación-->
+  <% // contenido para usuarios NO logados %> <!--Condicional para mostrar contenido según el estado de autenticación-->
   <% if (!session.userId) { %>
     <p>Para ver el contenido debes hacer <a href="/login">login</a></p>
   <% } %>
 
-  <%# contenido para usuarios logados %>
-  <% if (session.userId) { %>
-    <h2>Bucles</h2>
-    <% agents.forEach(agent => { %> <!-- Ejemplo de bucle en EJS -->
-      <p>
-        <%= agent.name %> tiene <%= agent.age %> años.  
-        <!-- Añade un enlace para eliminar el agente -->
-        <a href="/agents/delete/<%= agent.id %>"><i class="bi bi-trash"></i></a>
-      </p>
-    <% }) %>
-  <% } %>
+  <%# Sección para usuarios logados %>
+<% if (session.userId) { %>
+  <h2>Bucles</h2>
+  <%# Inicio del bucle para mostrar agentes %>
+  <% agents.forEach(agent => { %>
+    <p>
+      <%# Imagen del avatar del agente %>
+      <%# Se usa una expresión ternaria para mostrar el avatar del agente o una imagen de placeholder %>
+      <img
+        src="<%= agent.avatar ? `/avatars/${agent.avatar}` : 'https://placehold.co/50' %>"
+        alt="avatar"
+        width="50"
+      />
+      
+      <%# Nombre y edad del agente %>
+      <%= agent.name %> tiene <%= agent.age %> años.  
+      
+      <%# Enlace para eliminar el agente %>
+      <a href="/agents/delete/<%= agent.id %>"><i class="bi bi-trash"></i></a>
+    </p>
+  <% }) %>
+  <%# Fin del bucle de agentes %>
+<% } %>
 
 </div>
 <%- include('footer.ejs') %>
