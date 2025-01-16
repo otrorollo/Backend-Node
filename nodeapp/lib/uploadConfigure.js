@@ -1,12 +1,13 @@
 import multer from 'multer'
 import path from 'node:path'
+import { __dirname } from './utils'
 
 
 //Declaro una configuración de almacenamiento de los archivos subidos   
 const storage = multer.diskStorage({
   /** Define el directorio de destino para los archivos */
   destination: function(req, file, callback) {
-    const ruta = path.join(import.meta.dirname, '..', 'public', 'avatars') 
+    const ruta = path.join(__dirname, '..', 'public', 'avatars') 
     callback(null, ruta)
   },
 
