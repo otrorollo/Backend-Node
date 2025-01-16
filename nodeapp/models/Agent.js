@@ -4,7 +4,8 @@ import mongoose, { Schema } from 'mongoose';
 const agentSchema = new Schema({
     name: { type: String, unique: true },
     age: { type: Number, min: 18, max: 150 },
-    owner: { type: Schema.Types.ObjectId, ref: 'User' }
+    owner: { type: Schema.Types.ObjectId, ref: 'User' },
+    avatar: String //en este caso que sea tipo string quiere decir que guardará la ruta de la imagen
 }, {
     // collection: 'agentes' // para forzar el nombre de la colección y evitar pluralización
 })

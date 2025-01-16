@@ -9,12 +9,15 @@ export async function postNew(req, res, next) {
     //Obtiene el ID del usuario de la sesión actual
     const userId = req.session.userId
     const { name, age } = req.body
-    // TODO validaciones
+    /** Muestra información del archivo cargado en la consola para depuración */
+    console.log(req.file)
+
     // Creo una nueva instancia de Agent asignando el userId como propietario
     const agent = new Agent({
       name,
       age,
-      owner: userId
+      owner: userId,
+      avatar: req.file.filename
     })
     // Guarda el nuevo agente en la base de datos
     await agent.save()
@@ -25,6 +28,7 @@ export async function postNew(req, res, next) {
     next(err)
   }
 }
+
 export async function deleteAgent(req, res, next) {
   const userId = req.session.userId
   const agentId = req.params.agentId
@@ -36,11 +40,13 @@ export async function deleteAgent(req, res, next) {
     console.warn(`WARNING - el usuario ${userId} está intentando eliminar un agente inexistente`)
     return next(createError(404, 'Not found'))
   } 
+
   // Verifica si el usuario actual es el propietario del agente
   if (agent.owner.toString() !== userId) {
     console.warn(`WARNING - el usuario ${userId} está intentando eliminar un agente de otro usuario`)
     return next(createError(401, 'Not authorized'))
   }
+
   // Elimina el agente
   await Agent.deleteOne({ _id: agentId })
   res.redirect('/')

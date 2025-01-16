@@ -10,6 +10,9 @@ import * as sessionManager from './lib/sessionManager.js'//Importa el módulo de
 console.log('Conectado a MongoDB.') //Informar al usuario cuando la conexión se ha establecido exitosamente.
 import * as loginController from './controllers/loginController.js'
 import * as agentsController from './controllers/agentsController.js' //Importa el controlador agentsController para manejar las rutas relacionadas con agentes
+import upload from './lib/uploadConfigure.js' //Importa el middleware de configuración de subida de archivos
+
+
 //-------------------------------------------------------------------------------------------------------------
 await connectMongoose() //para que espere a que se conecte - top level await
 
@@ -60,7 +63,8 @@ app.all('/logout', loginController.logout)
 app.get('/agents/new', sessionManager.isLoggedIn, agentsController.index) 
 // Se utiliza el middleware isLoggedIn para verificar si el usuario está autenticado
 
-app.post('/agents/new', sessionManager.isLoggedIn, agentsController.postNew)
+app.post('/agents/new', sessionManager.isLoggedIn, upload.single('avatar'), agentsController.postNew) //cada entre comas es un middleware, quiere decir que se ejecutan en orden. 
+// De forma resumida un Middleware es una función que tiene acceso al objeto de solicitud (req), al objeto de respuesta (res), y a la siguiente función de middleware en el ciclo de solicitud-respuesta de la aplicación (next).
 /**
  * Ruta POST para manejar la creación de un nuevo agente
  * Utiliza el middleware isLoggedIn para asegurar que solo usuarios autenticados puedan crear agentes

@@ -1,0 +1,6 @@
+#ignora todo el contenido de la carpeta avatars
+*
+
+
+# ... excepto el gitignore
+!.gitignore
