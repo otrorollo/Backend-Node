@@ -21,8 +21,10 @@ next es una función que se usa para pasar el control al siguiente middleware, a
 En este caso, la función simplemente envía 'Hola' como respuesta cuando alguien visita la página principal.
  *  */    
 
+//---------------------------------------------------
 
 // GET /
+
 export async function index(req, res, next) {
 //export function index(req, res, next) {
  //   res.render('home', { /** Renderiza la vista 'home' con datos dinámicos */
@@ -34,6 +36,19 @@ export async function index(req, res, next) {
 //}
 const now = new Date()
 const userId = req.session.userId //Obtiene el ID del usuario de la sesión actual
+// http://localhost:3000/?name=Jones&Age=23
+const filterAge = req.query.age // Filtra por edad
+
+//---------------------------------------------------
+
+const filterName = req.query.name //Filtra por nombre
+  // http://localhost:3000/?limit=2&skip=2
+const limit = req.query.limit // Define el límite de resultados
+const skip = req.query.skip // Define cuántos resultados omitir
+  // http://localhost:3000/?sort=age
+const sort = req.query.sort // Define el criterio de ordenación
+
+//---------------------------------------------------
 
     res.locals.nombre = '<script>alert("inyeccion de codigo")</script>' /** Ejemplo de inyección de código (será escapado por EJS) */
     res.locals.esPar = (now.getSeconds() % 2) === 0 /** Determina si el segundo actual es par */
@@ -42,10 +57,19 @@ const userId = req.session.userId //Obtiene el ID del usuario de la sesión actu
     //ahora ponemos agetns para que entre en la base de datos
     res.locals.agents = await Agent.find()
 
+    //Construcción del Filtro
     if (userId) {
-        res.locals.agents = await Agent.find({ owner: userId })
-    } // Si el usuario está autenticado, busca y asigna a la vista solo los agentes que pertenecen a este usuario
+        const filter = { owner: userId } // Filtra agentes por el ID del usuario
+        if (filterAge) {
+            filter.age = filterAge
+        }
+        if (filterName) {
+            filter.name = filterName
+        }
 
+        res.locals.agents = await Agent.list(filter, limit, skip, sort)
+    }
+    
     res.render('home')
 }
 // GET /param_in_route/44

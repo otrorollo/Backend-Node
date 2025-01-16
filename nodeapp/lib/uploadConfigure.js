@@ -1,6 +1,6 @@
 import multer from 'multer'
 import path from 'node:path'
-import { __dirname } from './utils'
+import { __dirname } from './utils.js'
 
 
 //Declaro una configuración de almacenamiento de los archivos subidos   
