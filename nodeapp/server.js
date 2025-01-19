@@ -1,8 +1,8 @@
+import 'dotenv/config' // alternativa a partir de Node 22: node --env-file .env server.js
 import http from 'node:http'; // Importa el módulo HTTP de Node.js
-
 import debugLib from 'debug'; // Importa la librería de depuración
-
 import app from './app.js'
+
 
 /**
  * Se importan los módulos necesarios: http, express, y debug. 

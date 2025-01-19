@@ -1,11 +1,14 @@
 import session from 'express-session'
 import MongoStore from 'connect-mongo'
 
+const { MONGO_URI, SESSION_SECRET } = process.env
 const INACTIVITY_EXPIRATION_2_DAYS = 1000 * 60 * 60 * 24 * 2
+
 /**
  * Configura el middleware de sesión
  * @constant {Object} middleware - Configuración del middleware de sesión para su gestión
  */
+
 export const middleware = session({
   name: 'nodeapp-session',
   secret: 'kasdu7ads76sd76ds76ds765ds765dsf',
@@ -14,7 +17,7 @@ export const middleware = session({
   // configuracion del almacenamiento de las sesiones q se guardan en MongoDB
   cookie: { maxAge: INACTIVITY_EXPIRATION_2_DAYS },
   store: MongoStore.create({
-    mongoUrl: 'mongodb://127.0.0.1:27017/cursonode'
+    mongoUrl: MONGO_URI
   })
 })
 

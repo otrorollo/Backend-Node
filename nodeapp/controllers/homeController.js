@@ -61,22 +61,24 @@ const sort = req.query.sort // Define el criterio de ordenación
     if (userId) {
         const filter = { owner: userId } // Filtra agentes por el ID del usuario
         if (filterAge) {
-            filter.age = filterAge
-        }
+            filter.age = filterAge // Añade filtro de edad si está presente
+
         if (filterName) {
-            filter.name = filterName
+            filter.name = filterName // Añade filtro de nombre si está presente
         }
 
-        res.locals.agents = await Agent.list(filter, limit, skip, sort)
+        res.locals.agents = await Agent.list(filter, limit, skip, sort) // Llama a la función list del modelo Agent
     }
     
     res.render('home')
+}
 }
 // GET /param_in_route/44
 export function paranInRouteExample(req, res, next) {
     /** Extrae el parámetro 'num' de la URL */
     const num = req.params.num
     /** Envía una respuesta con el número recibido */
+
     res.send('Received ' + num)
     }
 
@@ -98,6 +100,7 @@ export function paranInRouteMultipleExample(req, res, next) {
 export function paramInQuery(req, res, next) {
     const size = req.query.size
     const color = req.query.color
+
     res.send(`Received size ${size} color ${color}`)
 }
 // POST /create-example
@@ -106,7 +109,7 @@ export function createExample(req, res, next) {
     const item = req.body.item
 
     // validation
-assert(item, 'item is required')
+    assert(item, 'item is required')
 
     /** Envía una respuesta con el ítem recibido */
     res.send('Received ' + item)
@@ -140,5 +143,6 @@ export function validateQueryExample(req, res, next) {
     validationResult(req).throw()  // Lanza un error si hay fallos de validación
     const param1 = req.query.param1
     const param2 = req.query.param2
+        
     res.send(`Validated ${param1} ${param2}`)
 }

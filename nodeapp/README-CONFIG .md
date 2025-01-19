@@ -9,10 +9,12 @@ npm install - en el caso de qno tuviera instalado,
 
 ``` sh
 --- Inicialización de la base de datos
-Para el primer despliegue o para reiniciar la base de datos, puedes ejecutar el siguiente comando: 
-On first deploy you can run next command to empty the database and create initial data:
-Esto por primera vez o para reiniciar la base de dato, corres el codigo y luego, te preguntara debes de poner yes or no 
-```js
+ 
+On first deploy copy .env.example to .env and custimize environment variables
+```sh
+cp .env.example .env
+```
+You can run next command to empty the database and create initial data:
 npm run initDB -- Leer ya que cuando hace la pregunta se responde con si , el propio archivo lo indica.
 ```
 
