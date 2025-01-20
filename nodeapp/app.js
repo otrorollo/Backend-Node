@@ -11,7 +11,7 @@ console.log('Conectado a MongoDB.') //Informar al usuario cuando la conexión se
 import * as loginController from './controllers/loginController.js'
 import * as agentsController from './controllers/agentsController.js' //Importa el controlador agentsController para manejar las rutas relacionadas con agentes
 import upload from './lib/uploadConfigure.js' //Importa el middleware de configuración de subida de archivos
-
+import i18n from './lib/i18nConfigure.js'
 
 //-------------------------------------------------------------------------------------------------------------
 await connectMongoose() //para que espere a que se conecte - top level await
@@ -44,10 +44,11 @@ app.use(express.static('public')) //Configura el middleware para servir archivos
 //-------------------------------------------------------------------------------------------------------------
 
 /**
- * Application routes: Definición de rutas de la aplicación
+ * WEBSITE routes: Definición de rutas de la aplicación
  * Aplica el middleware de sesión y hace disponible la sesión en las vistas
  */
-app.use(sessionManager.middleware, sessionManager.useSessionInViews)
+app.use(sessionManager.middleware, sessionManager.useSessionInViews) //Middleware de sesión
+app.use(i18n.init) // Inicializa el middleware de internacionalización
 //-------------------------------------------------------------------------------------------------------------
 
 // public pages:

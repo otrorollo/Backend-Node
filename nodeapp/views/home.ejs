@@ -7,10 +7,10 @@
 
   <p>Ejemplo de inyección de código <%= nombre %></p> <!-- Ejemplo de escape automático de EJS para prevenir XSS -->
 
-  <h2>Condicionales</h2> 
+  <h2><%= __('Conditionals') %></h2> 
   <p>El segundo actual es: <%= segundoActual %></p>
   <% if (esPar) { %>
-    <p>El segundo actual es par.</p>
+    <p><%= __('Current second is even') %></p>
   <% } else { %>
     <p>El segundo actual es impar.</p>
   <% } %>
@@ -23,6 +23,10 @@
   <%# Sección para usuarios logados %>
 <% if (session.userId) { %>
   <h2>Bucles</h2>
+  <form>
+    <input type="text" name="name">
+    <button type="submit">buscar</button>
+  </form>
   <%# Inicio del bucle para mostrar agentes %>
   <% agents.forEach(agent => { %>
     <p>
