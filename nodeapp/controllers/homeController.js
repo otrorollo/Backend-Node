@@ -62,7 +62,7 @@ const sort = req.query.sort // Define el criterio de ordenación
         const filter = { owner: userId } // Filtra agentes por el ID del usuario
         if (filterAge) {
             filter.age = filterAge // Añade filtro de edad si está presente
-
+        }
         if (filterName) {
             filter.name = filterName // Añade filtro de nombre si está presente
         }
@@ -72,7 +72,7 @@ const sort = req.query.sort // Define el criterio de ordenación
     
     res.render('home')
 }
-}
+
 // GET /param_in_route/44
 export function paranInRouteExample(req, res, next) {
     /** Extrae el parámetro 'num' de la URL */
