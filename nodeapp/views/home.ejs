@@ -3,9 +3,11 @@
 <!-- Se envuelve el contenido en un contenedor de Bootstrap para mejorar el diseño -->
 <div class="container">
 
-  <p>User ID: <%= session.userId %></p> <!-- Muestra el ID del usuario si está logado -->
+  <p>User ID: <%= session.userId %></p> 
+  <%# Muestra el ID del usuario si está logado %>
 
-  <p>Ejemplo de inyección de código <%= nombre %></p> <!-- Ejemplo de escape automático de EJS para prevenir XSS -->
+  <p>Ejemplo de inyección de código <%= nombre %></p> 
+  <%# Ejemplo de escape automático de EJS para prevenir XSS  %>
 
   <h2><%= __('Conditionals') %></h2> 
   <p>El segundo actual es: <%= segundoActual %></p>
@@ -15,7 +17,7 @@
     <p>El segundo actual es impar.</p>
   <% } %>
 
-  <% // contenido para usuarios NO logados %> <!--Condicional para mostrar contenido según el estado de autenticación-->
+  <%# contenido para usuarios NO logados - Condicional para mostrar contenido según el estado de autenticación %>
   <% if (!session.userId) { %>
     <p>Para ver el contenido debes hacer <a href="/login">login</a></p>
   <% } %>
@@ -39,7 +41,8 @@
       />
       
       <%# Nombre y edad del agente %>
-      <%= agent.name %> tiene <%= agent.age %> años.  
+      <!-- se deja comentado: agent.name %> tiene <%= agent.age %> años.  -->
+      <%= __('{{name}} is {{age}} years old', agent) %>
       
       <%# Enlace para eliminar el agente %>
       <a href="/agents/delete/<%= agent.id %>"><i class="bi bi-trash"></i></a>
@@ -47,6 +50,13 @@
   <% }) %>
   <%# Fin del bucle de agentes %>
 <% } %>
+
+<h2><%= __('Pluralización example') %></h2>
+<p>0 <%= __n('Mouse', 0) %></p>
+  <p>1 <%= __n('Mouse', 1) %></p>
+  <p>2 <%= __n('Mouse', 2) %></p>
+  <p>3 <%= __n('Mouse', 3) %></p>
+  <p>4 <%= __n('Mouse', 4) %></p>
 
 </div>
 <%- include('footer.ejs') %>

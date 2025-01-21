@@ -50,7 +50,7 @@ const sort = req.query.sort // Define el criterio de ordenación
 
 //---------------------------------------------------
 
-    res.locals.nombre = '<script>alert("inyeccion de codigo")</script>' /** Ejemplo de inyección de código (será escapado por EJS) */
+    res.locals.nombre = `<script>alert("${res.__('code injection')}")</script>` /** Ejemplo de inyección de código (será escapado por EJS) */
     res.locals.esPar = (now.getSeconds() % 2) === 0 /** Determina si el segundo actual es par */
     res.locals.segundoActual = now.getSeconds()   /** Obtiene el segundo actual */
     /** Array de usuarios para demostrar bucles en EJS */

@@ -1,4 +1,11 @@
 {
-  "Conditionals": "Conditionals",
-  "Current second is even": "Current second is even"
+	"Conditionals": "Conditionals",
+	"Current second is even": "Current second is even",
+	"{{name}} is {{age}} years old": "{{name}} is {{age}} years old",
+	"code injection": "code injection",
+	"Pluralización example": "Pluralización example",
+	"Mouse": {
+		"one": "Mouse",
+		"other": "Mice"
+	}
 }
