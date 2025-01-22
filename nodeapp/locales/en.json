@@ -7,5 +7,12 @@
 	"Mouse": {
 		"one": "Mouse",
 		"other": "Mice"
-	}
+	},
+	"New Agent": "New Agent",
+	"Name": "Name",
+	"Age": "Age",
+	"Avatar": "Avatar",
+	"Submit": "Submit",
+	"Bucles": "Loops",
+	"Home": "Home"
 }

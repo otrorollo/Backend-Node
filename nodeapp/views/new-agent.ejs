@@ -2,29 +2,29 @@
 
 <div class="container">
 
-  <h1>New Agent</h1>
+  <h1><%= __(New Agent') %></h1>
 
   <form method="POST" enctype="multipart/form-data"> <!-- Formulario para crear un nuevo agente -->
     
     <!-- Campo para cargar el nombre -->
     <div class="mb-3">
-      <label for="exampleInputEmail1" class="form-label">Name</label>
+      <label for="exampleInputEmail1" class="form-label"><%= __(Name') %></label>
       <input type="text" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
     </div>
     
     <!-- Campo para cargar la edad -->
     <div class="mb-3">
-      <label for="exampleInputPassword1" class="form-label">Age</label>
+      <label for="exampleInputPassword1" class="form-label"><%= __(Age') %></label>
       <input type="number" name="age" class="form-control" id="exampleInputPassword1">
     </div>
     
     <!-- Campo para cargar el avatar -->
     <div class="mb-3">
-      <label for="customFile" class="form-label">Avatar</label>
+      <label for="customFile" class="form-label"><%= __(Avatar') %></label>
       <input type="file" name="avatar" class="form-control" id="customFile">
     </div>
 
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary"><%= __(Submit') %></button>
 
   </form>
 </div>
