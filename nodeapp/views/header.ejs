@@ -25,6 +25,17 @@
             <a class="nav-link" href="/agents/new">New Agent</a> <!-- Agrega un enlace en la barra de navegación para acceder al formulario de creación de un nuevo agente -->
           </li>
         </ul>
+
+        
+        <%# lang selector %>
+        <div>
+          <% getLocales().forEach( lang => { %>
+            <%# alternativa con query string %>
+            <a href="/change-locale/?locale=<%= lang %>"><%= lang %></a>
+          <% }) %>
+        </div>
+        <%# login / logout %>
+
         <form class="d-flex" role="search">
           <% if (session.userId) { %>
             <!-- Muestra el botón de Logout si el usuario está autenticado -->

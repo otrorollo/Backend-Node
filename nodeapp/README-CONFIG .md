@@ -70,3 +70,52 @@ Ambas configuraciones incluyen:
 Captura de salida estándar
 Variables de entorno predefinidas
 Puerto configurado a 3000
+
+# INFO SOBRE TERMINAL - NO CONECTA BIEN AL PUERTO.
+El error EADDRINUSE indica que el puerto 3000 ya está siendo utilizado por otra aplicación o proceso en tu sistema. Esto suele ocurrir si:
+
+Tienes otra instancia de tu servidor Node.js corriendo en segundo plano.
+
+Otra aplicación (como otro servidor, contenedor Docker, o programa) está usando el puerto 3000.
+Solución Paso a Paso
+1. Cerrar el proceso que usa el puerto 3000:
+En Windows:
+
+```sh
+
+# Encuentra el PID (ID del proceso) que usa el puerto 3000:
+netstat -ano | findstr :3000
+
+# Mata el proceso (reemplaza [PID] con el número que aparezca):
+taskkill /PID [PID] /F
+```
+
+## Alternativa: Cambiar el puerto del servidor
+Si el error persiste, cambia el puerto en tu archivo server.js (o donde definas el puerto). Por ejemplo, usa el puerto 3001:
+
+``` sh
+Copy
+// server.js
+app.listen(3001, () => {
+  console.log("Servidor escuchando en http://localhost:3001");
+});
+
+``` 
+## Causa del Error
+El servidor intenta iniciarse en el puerto 3000 (app.listen(3000)), pero ya hay otro proceso bloqueando ese puerto. Esto es común si:
+
+Olvidaste detener una ejecución anterior del servidor (Ctrl+C en la terminal).
+Tienes una instancia de Node.js en segundo plano por un cierre incorrecto.
+
+## Prevención Futura
+Siempre cierra correctamente el servidor con Ctrl+C en la terminal.
+Si usas nodemon, asegúrate de que no hay procesos huérfanos:
+
+``` SH
+Copy
+# En macOS/Linux:
+pkill -f nodemon
+
+# En Windows (PowerShell):
+Get-Process | Where-Object { $_.Name -eq "node" } | Stop-Process
+``` 

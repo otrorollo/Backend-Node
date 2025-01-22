@@ -8,6 +8,9 @@ const i18n = new I18n({
   defaultLocale: 'en', // Idioma por defecto
   autoReload: true, // Recarga automática de archivos de traducción
   syncFiles: true, // Sincronización de archivos de traducción
+  cookie: 'nodeapp-locale', 
+  // Nombre de la cookie (debe coincidir con el usado en el controlador) 
+  //  Solo cookie, sin queryParameter
 })
 
 export default i18n
