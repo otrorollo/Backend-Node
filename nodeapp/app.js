@@ -14,6 +14,7 @@ import * as agentsController from './controllers/agentsController.js'; //Importa
 import upload from './lib/uploadConfigure.js'; //Importa el middleware de configuración de subida de archivos
 import i18n from './lib/i18nConfigure.js';
 import * as langController from './controllers/langController.js';
+import * as apiAgentsController from './controllers/api/apiAgentsController.js'; //Importa el controlador de la API de agentes
 
 //-------------------------------------------------------------------------------------------------------------
 await connectMongoose() //para que espere a que se conecte - top level await
@@ -38,12 +39,18 @@ app.set('view engine', 'ejs') // Establece EJS como el motor de plantillas
  */
 app.use(logger('dev'));
 app.use(express.json()); // Middleware para parsear el body que venga en formato JSON
-app.use(express.urlencoded({ extended: false })); //Middleware para  parsear el body que venga urlencoded (formularios)
+app.use(express.urlencoded({ extended: false })); //Middleware para parsear el body que venga urlencoded (formularios)
 // La opción 'extended: false' utiliza la librería querystring para el parseo
 app.use(express.static('public')); //Configura el middleware para servir archivos estáticos desde la carpeta 'public'
 app.use(cookieParser()); //Configura el middleware cookie-parser para manejar cookies
 
 //-------------------------------------------------------------------------------------------------------------
+/**
+ * WEBSITE APIS: Definición de rutas de la API de la aplicación
+ */
+app.get('/api/agents', apiAgentsController.apiAgentList) //Ruta GET de la api para obtener la lista de agentes
+
+
 // Middlewares de sesión e i18n
 /**
  * WEBSITE routes: Definición de rutas de la aplicación

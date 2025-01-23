@@ -34,20 +34,17 @@ export async function index(req, res, next) {
 //    res.locals.nombre = 'Javier' /** Define una variable local para esta respuesta específica */
 //        res.render('home')
 //}
+
 const now = new Date()
 const userId = req.session.userId //Obtiene el ID del usuario de la sesión actual
 // http://localhost:3000/?name=Jones&Age=23
 const filterAge = req.query.age // Filtra por edad
-
-//---------------------------------------------------
-
 const filterName = req.query.name //Filtra por nombre
-  // http://localhost:3000/?limit=2&skip=2
+// http://localhost:3000/?limit=2&skip=2
 const limit = req.query.limit // Define el límite de resultados
 const skip = req.query.skip // Define cuántos resultados omitir
-  // http://localhost:3000/?sort=age
+// http://localhost:3000/?sort=age
 const sort = req.query.sort // Define el criterio de ordenación
-
 //---------------------------------------------------
 
     res.locals.nombre = `<script>alert("${res.__('code injection')}")</script>` /** Ejemplo de inyección de código (será escapado por EJS) */
@@ -67,9 +64,8 @@ const sort = req.query.sort // Define el criterio de ordenación
             filter.name = filterName // Añade filtro de nombre si está presente
         }
 
-        res.locals.agents = await Agent.list(filter, limit, skip, sort) // Llama a la función list del modelo Agent
+        res.locals.agents = await Agent.List(filter, limit, skip, sort) // Llama a la función list del modelo Agent
     }
-    
     res.render('home')
 }
 
