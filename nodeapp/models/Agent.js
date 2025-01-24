@@ -11,7 +11,7 @@ const agentSchema = new Schema({
 
 // Definir la función estática `list` en el esquema
 // return list of agents - 
-agentSchema.statics.List = function(filter, limit, skip, sort) { 
+agentSchema.statics.List = function(filter, limit, skip, sort, fields) { 
     const query = Agent.find(filter) // Crea una consulta con el filtro proporcionado
     query.limit(limit) // Aplica el límite a la consulta
     query.skip(skip)  // Omite un número específico de resultados

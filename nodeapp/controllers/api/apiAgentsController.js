@@ -10,7 +10,9 @@ export async function apiAgentList(req, res, next) {
     const skip = req.query.skip // Define cuántos resultados omitir
     // http://localhost:3000/api/agents/?sort=age
     const sort = req.query.sort // Define el criterio de ordenación
-    
+    const fields = req.query.fields
+
+
     const filter = { } 
     if (filterAge) {
         filter.age = filterAge // Añade filtro de edad si está presente
@@ -20,7 +22,7 @@ export async function apiAgentList(req, res, next) {
     }
 
       //busqueda de agentes
-    const agents = await Agent.List(filter, limit, skip, sort)  //Estos parametros son los que se pasan a la función List del modelo Agent
+    const agents = await Agent.List(filter, limit, skip, sort, fields)  //Estos parametros son los que se pasan a la función List del modelo Agent
     //funcionan de este modo: filter es el filtro de busqueda, 
     // limit es el número de resultados a mostrar, 
     // skip es el número de resultados a omitir y 
