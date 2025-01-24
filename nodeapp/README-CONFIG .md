@@ -119,3 +119,27 @@ pkill -f nodemon
 # En Windows (PowerShell):
 Get-Process | Where-Object { $_.Name -eq "node" } | Stop-Process
 ``` 
+
+---------------------------------------------------------------------------------
+## API
+
++ BASE URL: http://localhost:3000/api
+
+### Agent list
+GET /api/agents
+
+```json
+{
+    "results": [
+        {
+            "_id": "67606e86a195b1ecf0e0a122",
+            "name": "Smith",
+            "age": 31,
+            "owner": "67606e86a195b1ecf0e0a11c",
+            "__v": 0
+        },
+        // ...
+    ],
+    "count": 5
+}
+```
