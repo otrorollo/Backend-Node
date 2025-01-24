@@ -32,8 +32,12 @@ export async function apiAgentList(req, res, next) {
     /**porque se pone un await? porque la función es async, y el await espera a que se resuelva la promesa
     * para continuar con la ejecución del código
     */
-    res.json({ result: agents }) //devuelve un json con la lista de agentes
-    
+    const agentCount = await Agent.countDocuments(filter)
+    res.json({ 
+      result: agents,
+      count: agentCount
+     }) //devuelve un json con la lista de agentes
+    //http://localhost:3000/api/agents/?limit=2&skip=2&name=Jones
   } catch (error) { 
      next(error) //si hay un error, pasa al siguiente middleware
   }
