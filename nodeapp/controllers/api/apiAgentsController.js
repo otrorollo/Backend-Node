@@ -46,19 +46,19 @@ export async function apiAgentList(req, res, next) {
 */
 
 
-const [agents, agentCount] = await Promise.all([ //Se ejecutan las dos promesas de forma simultanea
-  Agent.list(filter, limit, skip, sort, fields), 
-  Agent.countDocuments(filter) //Cuenta el número de agentes que cumplen el filtro
-])
+    const [agents, agentCount] = await Promise.all([ //Se ejecutan las dos promesas de forma simultanea
+      Agent.list(filter, limit, skip, sort, fields), 
+      Agent.countDocuments(filter) //Cuenta el número de agentes que cumplen el filtro
+    ])
 
-res.json({ //Devuelve un json con la lista de agentes y el número de agentes que cumplen el filtro
-  results: agents,
-  count: agentCount
-})
+    res.json({ //Devuelve un json con la lista de agentes y el número de agentes que cumplen el filtro
+      results: agents,
+      count: agentCount
+    })
 
-} catch (error) {
-next(error)
-}
+  } catch (error) {
+  next(error)
+  }
 }
 
 export async function apiAgentGetOne(req, res, next) {
