@@ -21,8 +21,9 @@ export async function apiAgentList(req, res, next) {
         filter.name = filterName // Añade filtro de nombre si está presente
     }
 
-      //busqueda de agentes
-    const agents = await Agent.List(filter, limit, skip, sort, fields)  //Estos parametros son los que se pasan a la función List del modelo Agent
+  //BUSQUEDA DE AGENTES EN LA BASE DE DATOS
+
+    //const agents = await Agent.List(filter, limit, skip, sort, fields)  //Estos parametros son los que se pasan a la función List del modelo Agent
     //funcionan de este modo: filter es el filtro de busqueda, 
     // limit es el número de resultados a mostrar, 
     // skip es el número de resultados a omitir y 
@@ -32,7 +33,7 @@ export async function apiAgentList(req, res, next) {
     /**porque se pone un await? porque la función es async, y el await espera a que se resuelva la promesa
     * para continuar con la ejecución del código
     */
-    const agentCount = await Agent.countDocuments(filter)
+    /*const agentCount = await Agent.countDocuments(filter)
     res.json({ 
       result: agents,
       count: agentCount
@@ -41,6 +42,23 @@ export async function apiAgentList(req, res, next) {
   } catch (error) { 
      next(error) //si hay un error, pasa al siguiente middleware
   }
+}
+*/
+
+
+const [agents, agentCount] = await Promise.all([ //Se ejecutan las dos promesas de forma simultanea
+  Agent.list(filter, limit, skip, sort, fields), 
+  Agent.countDocuments(filter) //Cuenta el número de agentes que cumplen el filtro
+])
+
+res.json({ //Devuelve un json con la lista de agentes y el número de agentes que cumplen el filtro
+  results: agents,
+  count: agentCount
+})
+
+} catch (error) {
+next(error)
+}
 }
 
 export async function apiAgentGetOne(req, res, next) {
@@ -68,6 +86,21 @@ export async function apiAgentNew(req, res, next) {
     const savedAgent = await agent.save() 
 
     res.status(201).json({ result: savedAgent }) //devuelve un json con el agente guardado
+  } catch (error) {
+    next(error)
+  }
+}
+
+//Actualiza un agente
+export async function apiAgentUpdate(req, res, next) { 
+  try {
+    const agentId = req.params.agentId
+    const agentData = req.body
+    agentData.avatar = req.file?.filename
+    const updatedAgent = await Agent.findByIdAndUpdate(agentId, agentData, {
+      new: true // para obtener el documento actualizado
+    })
+    res.status(201).json({ result: updatedAgent })
   } catch (error) {
     next(error)
   }
