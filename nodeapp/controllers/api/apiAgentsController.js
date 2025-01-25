@@ -42,3 +42,15 @@ export async function apiAgentList(req, res, next) {
      next(error) //si hay un error, pasa al siguiente middleware
   }
 }
+
+export async function apiAgentGetOne(req, res, next) {
+  try {
+    const agentId = req.params.agentId
+
+    const agent = await Agent.findById(agentId) 
+
+    res.json({ result: agent }) 
+  } catch (error) {
+    next(error)
+  }
+}

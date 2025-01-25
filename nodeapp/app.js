@@ -49,6 +49,8 @@ app.use(cookieParser()); //Configura el middleware cookie-parser para manejar co
  * WEBSITE APIS: Definición de rutas de la API de la aplicación
  */
 app.get('/api/agents', apiAgentsController.apiAgentList) //Ruta GET de la api para obtener la lista de agentes
+app.get('/api/agents/:agentId', apiAgentsController.apiAgentGetOne) 
+//Ruta GET de la api para obtener un agente por su ID
 
 
 // Middlewares de sesión e i18n
