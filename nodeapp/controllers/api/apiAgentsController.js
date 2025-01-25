@@ -54,3 +54,21 @@ export async function apiAgentGetOne(req, res, next) {
     next(error)
   }
 }
+
+export async function apiAgentNew(req, res, next) {
+  try {
+    const agentData = req.body
+    // crea agente instanciando el modelo de agentes con los datos del body
+    // Se instancia en memoria, no se guarda en la base de datos
+    const agent = new Agent(agentData) 
+    agent.avatar = req.file?.filename //añade la imagen
+
+    //save agent to database 
+    //guarda el agente en la base de datos
+    const savedAgent = await agent.save() 
+
+    res.status(201).json({ result: savedAgent }) //devuelve un json con el agente guardado
+  } catch (error) {
+    next(error)
+  }
+}

@@ -51,7 +51,7 @@ app.use(cookieParser()); //Configura el middleware cookie-parser para manejar co
 app.get('/api/agents', apiAgentsController.apiAgentList) //Ruta GET de la api para obtener la lista de agentes
 app.get('/api/agents/:agentId', apiAgentsController.apiAgentGetOne) 
 //Ruta GET de la api para obtener un agente por su ID
-
+app.post('/api/agents', upload.single('avatar'), apiAgentsController.apiAgentNew) //Ruta POST de la api para crear un nuevo agente con avatar
 
 // Middlewares de sesión e i18n
 /**
