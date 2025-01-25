@@ -105,3 +105,13 @@ export async function apiAgentUpdate(req, res, next) {
     next(error)
   }
 }
+
+export async function apiAgentDelete(req, res, next) {
+  try {
+    const agentId = req.params.agentId
+    await Agent.deleteOne({ _id: agentId })
+    res.json()
+  } catch (error) {
+    next(error)
+  }
+}
