@@ -164,18 +164,31 @@ app.use((err, req, res, next) => {
  * Manejador de errores mejorado para errores de validación
  * Formatea los errores de validación para una respuesta más clara
  */
-if (err.array) {
-    
-    err.message = 'Invalid request: ' + err.array()
-        .map(e => `${e.location} ${e.type} ${e.path} ${e.msg}`)
-        .join(', ')
-    err.status = 422
-}
+    if (err.array) {
+        err.message = 'Invalid request: ' + err.array()
+            .map(e => `${e.location} ${e.type} ${e.path} ${e.msg}`)
+            .join(', ')
+        err.status = 422
+    }
 
     /** Establece el código de estado de la respuesta */
     res.status(err.status || 500)
    // res.send('Ocurrió un error: ' + err.message)  //quitamos esta linea en clase Lunes dia 28.
-// set locals, only providing error in development
+
+    // API error, send response with JSON
+        if (req.url.startsWith('/api/')) { // Verifica si la solicitud es una API
+            res.json({ error: err.message }) // Envia un JSON con el mensaje de error
+            return //Para que no siga ejecutando el código y ejecute el siguiente middleware
+        }
+
+
+
+
+
+
+
+
+   // set locals, only providing error in development
 /** Establece variables locales para la vista de error */
 res.locals.message = err.message
 
