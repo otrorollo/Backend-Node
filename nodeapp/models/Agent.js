@@ -16,6 +16,7 @@ agentSchema.statics.List = function(filter, limit, skip, sort, fields) {
     query.limit(limit) // Aplica el límite a la consulta
     query.skip(skip)  // Omite un número específico de resultados
     query.sort(sort)  // Aplica ordenación a los resultados
+    query.select(fields) // Selecciona los campos a mostrar
     return query.exec() // Ejecuta la consulta y retorna una promesa
 };
 

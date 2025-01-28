@@ -47,7 +47,7 @@ export async function apiAgentList(req, res, next) {
 
 
     const [agents, agentCount] = await Promise.all([ //Se ejecutan las dos promesas de forma simultanea
-      Agent.list(filter, limit, skip, sort, fields), 
+      Agent.List(filter, limit, skip, sort, fields), 
       Agent.countDocuments(filter) //Cuenta el número de agentes que cumplen el filtro
     ])
 
