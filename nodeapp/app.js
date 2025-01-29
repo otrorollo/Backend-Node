@@ -15,7 +15,7 @@ import upload from './lib/uploadConfigure.js'; //Importa el middleware de config
 import i18n from './lib/i18nConfigure.js';
 import * as langController from './controllers/langController.js';
 import * as apiAgentsController from './controllers/api/apiAgentsController.js'; //Importa el controlador de la API de agentes
-
+import swaggerMiddleware from './lib/swaggerMiddleware.js'; //Importa el middleware de Swagger
 //-------------------------------------------------------------------------------------------------------------
 await connectMongoose() //para que espere a que se conecte - top level await
 
@@ -81,6 +81,8 @@ app.get('/', homeController.index) //Ruta para demostrar parámetros en la URL -
 app.get('/login', loginController.index)
 app.post('/login', loginController.postLogin)//Ruta POST para manejar el envío del formulario de login
 app.all('/logout', loginController.logout)
+app.use('/api-doc', swaggerMiddleware) //Ruta para mostrar la documentación de la API
+
 //-------------------------------------------------------------------------------------------------------------
 
 // private pages - Rutas privadas:

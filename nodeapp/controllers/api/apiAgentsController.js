@@ -1,5 +1,26 @@
 import Agent from '../../models/Agent.js' //importa el modelo de agentes
 
+/**
+ * @openapi
+ * /api/agents:
+ *  get:
+ *    description: |
+ *      Return list of agents
+ *      <br />
+ *      <b>Examples:</b>
+ *      pagination:      http://localhost:3000/api/agents?skip=2&limit=2
+ *      sorting:         http://localhost:3000/api/agents?sort=-age%20name
+ *      field selection: http://localhost:3000/api/agents?fields=age%20-_id
+ *    parameters:
+ *      - in: query
+ *        name: skip
+ *        schema:
+ *          type: integer
+ *    responses:
+ *      200:
+ *        description: Returns JSON
+ */
+
 export async function apiAgentList(req, res, next) {
   try {
     // http://localhost:3000/api/agents/?name=Jones&Age=23
