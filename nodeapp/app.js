@@ -48,6 +48,8 @@ app.use(cookieParser()); //Configura el middleware cookie-parser para manejar co
 /**
  * WEBSITE APIS: Definición de rutas de la API de la aplicación
  */
+
+// CRUD OPERATIONS FOR AGENTS RESOURCE - Operaciones CRUD para el recurso de agentes
 app.get('/api/agents', apiAgentsController.apiAgentList) //Ruta GET de la api para obtener la lista de agentes
 app.get('/api/agents/:agentId', apiAgentsController.apiAgentGetOne) 
 //Ruta GET de la api para obtener un agente por su ID

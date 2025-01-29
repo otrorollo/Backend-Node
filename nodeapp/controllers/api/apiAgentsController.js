@@ -100,7 +100,9 @@ export async function apiAgentUpdate(req, res, next) {
     const updatedAgent = await Agent.findByIdAndUpdate(agentId, agentData, {
       new: true // para obtener el documento actualizado
     })
-    res.status(201).json({ result: updatedAgent })
+    res.status(201).json({ result: updatedAgent }) 
+    //Buena practica devolver 201 en caso de creación
+    //Ademas poner resutl para que sea más claro
   } catch (error) {
     next(error)
   }
