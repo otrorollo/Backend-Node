@@ -3,7 +3,7 @@
 <!-- Se envuelve el contenido en un contenedor de Bootstrap para mejorar el diseño -->
 <div class="container">
 
-  <p>User ID: <%= session.userId %></p> 
+  <p><%= __('User ID') %>: <%= session.userId %></p>  
   <%# Muestra el ID del usuario si está logado %>
 
   <p>Ejemplo de inyección de código <%= nombre %></p> 
@@ -19,7 +19,7 @@
 
   <%# contenido para usuarios NO logados - Condicional para mostrar contenido según el estado de autenticación %>
   <% if (!session.userId) { %>
-    <p>Para ver el contenido debes hacer <a href="/login">login</a></p>
+    <p><%= __('Para ver el contenido debes') %> <a href="/login"><%= __('login') %></a></p>
   <% } %>
 
   <%# Sección para usuarios logados %>

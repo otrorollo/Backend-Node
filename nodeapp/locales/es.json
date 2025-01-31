@@ -15,5 +15,13 @@
 	"Submit": "Crear",
 	"Bucles": "Bucles",
 	"Home": "Inicio",
-	"API Documentation": "API Documentation"
+	"API Documentation": "API Documentación",
+	"Swagger": "Swagger",
+	"Redoc": "Redoc",
+	"Logout": "Cerrar sesión",
+	"Login": "Acceso",
+	"User ID": "ID de Usuario",
+	"Para ver el contenido debes": "Para ver el contenido debes",
+	"false": false,
+	"login": "Acceder"
 }

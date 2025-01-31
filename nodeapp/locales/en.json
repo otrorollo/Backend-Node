@@ -15,5 +15,15 @@
 	"Submit": "Submit",
 	"Bucles": "Loops",
 	"Home": "Home",
-	"API Documentation": "API Documentation"
+	"API Documentation": "API Documentation",
+	"Swagger": "Swagger",
+	"Redoc": "Redoc",
+	"Logout": "Logout",
+	"Login": "Login",
+	"User ID": "User ID",
+	"Para ver el contenido debes hacer login": "Para ver el contenido debes hacer login",
+	"false": false,
+	"login": "login",
+	"Para ver el contenido debes hacer": "Para ver el contenido debes hacer",
+	"Para ver el contenido debes": "Para ver el contenido debes"
 }

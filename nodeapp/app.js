@@ -81,7 +81,11 @@ app.get('/', homeController.index) //Ruta para demostrar parámetros en la URL -
 app.get('/login', loginController.index)
 app.post('/login', loginController.postLogin)//Ruta POST para manejar el envío del formulario de login
 app.all('/logout', loginController.logout)
-app.use('/api-doc', swaggerMiddleware) //Ruta para mostrar la documentación de la API
+app.use('/api-docs', swaggerMiddleware) //Ruta para mostrar la documentación de la API swagger
+//el /api-docs es la ruta que se va a usar para acceder a la documentación de la API
+//ese nombre de api-docs es el que se pone en el swagger.yaml
+//api-docs es un nombre inventado, se puede poner cualquier otro
+//redoc aqui no se pondría porque se pone arriba en middleware basicos y se ejecuta antes de las rutas
 
 //-------------------------------------------------------------------------------------------------------------
 
