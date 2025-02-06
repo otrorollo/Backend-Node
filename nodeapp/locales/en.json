@@ -3,7 +3,7 @@
 	"Current second is even": "Current second is even",
 	"{{name}} is {{age}} years old": "{{name}} is {{age}} years old",
 	"code injection": "code injection",
-	"Pluralización example": "Pluralización example",
+	"Pluralización example": "Pluralization example",
 	"Mouse": {
 		"one": "Mouse",
 		"other": "Mice"
@@ -21,9 +21,9 @@
 	"Logout": "Logout",
 	"Login": "Login",
 	"User ID": "User ID",
-	"Para ver el contenido debes hacer login": "Para ver el contenido debes hacer login",
 	"false": false,
 	"login": "login",
-	"Para ver el contenido debes hacer": "Para ver el contenido debes hacer",
-	"Para ver el contenido debes": "Para ver el contenido debes"
+	"Code injection example": "Code injection example",
+	"Para ver el contenido debes": "To view the content you must",
+	"Current second is odd": "Current second is odd"
 }

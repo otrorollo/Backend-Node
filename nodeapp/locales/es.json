@@ -21,7 +21,9 @@
 	"Logout": "Cerrar sesión",
 	"Login": "Acceso",
 	"User ID": "ID de Usuario",
-	"Para ver el contenido debes": "Para ver el contenido debes",
 	"false": false,
-	"login": "Acceder"
+	"login": "Acceder",
+	"Para ver el contenido debes": "Para ver el contenido debes",
+	"Code injection example": "Ejemplo de Inyección de código",
+	"Current second is odd": "Current second is odd"
 }

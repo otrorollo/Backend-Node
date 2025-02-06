@@ -86,7 +86,9 @@ app.use('/api-docs', swaggerMiddleware) //Ruta para mostrar la documentación de
 //ese nombre de api-docs es el que se pone en el swagger.yaml
 //api-docs es un nombre inventado, se puede poner cualquier otro
 //redoc aqui no se pondría porque se pone arriba en middleware basicos y se ejecuta antes de las rutas
-
+app.get('/redoc', (req, res) => {
+    res.sendFile('redoc-staticNode.html', { root: 'public' });
+});
 //-------------------------------------------------------------------------------------------------------------
 
 // private pages - Rutas privadas:

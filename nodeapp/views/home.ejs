@@ -6,15 +6,15 @@
   <p><%= __('User ID') %>: <%= session.userId %></p>  
   <%# Muestra el ID del usuario si está logado %>
 
-  <p>Ejemplo de inyección de código <%= nombre %></p> 
+  <p><%= __('Code injection example') %>: <%= nombre %></p> 
   <%# Ejemplo de escape automático de EJS para prevenir XSS  %>
 
   <h2><%= __('Conditionals') %></h2> 
-  <p>El segundo actual es: <%= segundoActual %></p>
+  <p><%= __('Current second is even') %>: <%= segundoActual %></p>
   <% if (esPar) { %>
     <p><%= __('Current second is even') %></p>
   <% } else { %>
-    <p>El segundo actual es impar.</p>
+    <p><%= __('Current second is odd') %></p>
   <% } %>
 
   <%# contenido para usuarios NO logados - Condicional para mostrar contenido según el estado de autenticación %>
