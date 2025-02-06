@@ -16,6 +16,7 @@ import i18n from './lib/i18nConfigure.js';
 import * as langController from './controllers/langController.js';
 import * as apiAgentsController from './controllers/api/apiAgentsController.js'; //Importa el controlador de la API de agentes
 import swaggerMiddleware from './lib/swaggerMiddleware.js'; //Importa el middleware de Swagger
+import * as apiLoginController from './controllers/api/apiLoginController.js' //Importa el controlador de la API de login
 //-------------------------------------------------------------------------------------------------------------
 await connectMongoose() //para que espere a que se conecte - top level await
 
@@ -58,7 +59,8 @@ app.put('/api/agents/:agentId', upload.single('avatar'), apiAgentsController.api
 //Ruta PUT de la api para actualizar un agente 
 app.delete('/api/agents/:agentId', apiAgentsController.apiAgentDelete) 
 //Ruta DELETE de la api para eliminar un agente
-
+app.post('/api/login', apiLoginController.loginJWT)
+//Ruta POST de la api para autenticar un usuario y emitir un token JWT 
 
 
 // Middlewares de sesión e i18n
